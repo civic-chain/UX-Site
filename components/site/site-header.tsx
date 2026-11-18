@@ -22,10 +22,10 @@ const mainNavLinks: readonly NavLink[] = [
       { label: "Team", href: "/about" },
       { label: "News & Media", href: "/news" },
       { label: "Press Kit", href: "/press" },
+      { label: "Trust", href: "/trust" },
     ],
   },
   { label: "How It Works", href: "/how-it-works" },
-  // "Trust" (/trust) is live but intentionally unlisted here pending team review.
   { label: "Demo", href: "/civic-chain-demo" },
 ];
 
