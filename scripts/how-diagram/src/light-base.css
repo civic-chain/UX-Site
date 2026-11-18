@@ -1,0 +1,114 @@
+/* ===== LIGHT BASE, shared by every variant =====================================
+   The shipped animation was drawn light-on-dark: every tile, label, chip, and
+   drawer used cream-50 at partial alpha so it read on the dark rail and the dark
+   cabinet. This block flips those to dark-on-light so the scene can sit on the
+   same warm surfaces as the rest of civic-chain.com. Nothing here changes layout
+   or choreography; the variant file that follows decides the surfaces.
+
+   Rules: ramp tokens only (no raw hex), ghost shadows tinted blue-900 at 7%
+   (no neutral-black shadow), gold-600 is the accent LINE on light ground because
+   gold-300 disappears on cream, and every coded hue belongs to Civic-Chain. */
+:root {
+  --v-ink:         var(--blue-900);
+  --v-ink-soft:    var(--blue-800);
+  --v-muted:       var(--slate-700);
+  --v-hair:        color-mix(in oklab, var(--blue-900) 12%, transparent);
+  --v-hair-strong: color-mix(in oklab, var(--blue-900) 22%, transparent);
+  --v-accent-line: var(--gold-600);
+  --v-accent-ink:  var(--gold-800);
+  --v-legacy-line: var(--cream-600);
+  --v-legacy-ink:  var(--cream-900);
+}
+
+/* Toggle: segmented control on a muted track, active segment lifts. */
+.rail-toggle { background: var(--surface-muted); border-color: var(--v-hair); }
+.rail-toggle .tog { color: var(--v-muted); }
+.rail-toggle .tog[data-mode="cc"].active { background: var(--gold-300); color: var(--gold-900); box-shadow: var(--shadow-active); }
+.rail-toggle .tog[data-mode="old"].active { background: var(--surface-subtle); color: var(--v-legacy-ink); box-shadow: var(--shadow-active); }
+
+/* Labels and glossary terms */
+.zlabel { color: var(--v-muted); }
+.fbo-tag { color: var(--v-accent-ink); }
+.term { border-bottom-color: var(--v-accent-line); }
+.term-pop { background: var(--surface-subtle); color: var(--v-ink); border: 1px solid var(--v-hair); box-shadow: var(--shadow-hover); }
+.term-pop strong { color: var(--v-accent-ink); }
+
+/* Tiles: light defaults, variants restyle the surface */
+.acct { background: var(--surface-subtle); border: 1px solid var(--v-hair); box-shadow: var(--shadow-active); }
+.acct .ic { background: var(--blue-100); color: var(--blue-800); }
+.acct .nm { color: var(--v-ink); }
+.acct .amt { color: var(--v-ink-soft); }
+.acct.is-active, .flip.is-active .acct { border-color: transparent; box-shadow: 0 0 0 2px var(--v-accent-line), var(--shadow-hover); }
+.acct.is-active .ic, .flip.is-active .acct .ic { background: var(--gold-300); color: var(--gold-900); }
+body.mode-old .acct.is-active { box-shadow: 0 0 0 2px var(--v-legacy-line), var(--shadow-rest); }
+body.mode-old .acct.is-active .ic { background: var(--cream-300); color: var(--v-legacy-ink); }
+
+/* Connectors */
+.conn { background-image: linear-gradient(90deg, var(--v-hair-strong) 0 8px, transparent 8px 15px); }
+.conn.on { background-image: linear-gradient(90deg, var(--v-accent-line) 0 8px, transparent 8px 15px); }
+body.mode-old .conn.on { background-image: linear-gradient(90deg, var(--v-legacy-line) 0 8px, transparent 8px 15px); }
+
+/* Money token */
+.money-token { background: var(--gold-300); color: var(--gold-900); border: 1px solid color-mix(in oklab, var(--gold-600) 40%, transparent); box-shadow: var(--shadow-rest); }
+body.mode-old .money-token { background: var(--surface-subtle); color: var(--v-legacy-ink); border: 1px solid color-mix(in oklab, var(--cream-900) 22%, transparent); box-shadow: var(--shadow-rest); }
+
+/* Fee chips. Legacy keeps rose for money lost; Civic-Chain fees stay gold. */
+.fee-pop { box-shadow: var(--shadow-active); }
+.fee-pop.cc, .fee-total.cc { background: var(--gold-200); color: var(--gold-900); border: 1px solid color-mix(in oklab, var(--gold-600) 40%, transparent); box-shadow: var(--shadow-active); }
+
+/* Status pill: a light chip, the dot carries state */
+.press-rail-status { background: var(--surface-subtle); border: 1px solid var(--v-hair); color: var(--v-ink); box-shadow: var(--shadow-active); }
+.press-rail-status .term { border-bottom-color: var(--v-accent-line); }
+.press-rail-status .d { background: var(--v-accent-line); animation: vPulseGold 1.4s ease-out infinite; }
+.press-rail-status.settled .d { background: var(--green-600); animation: vPulseGreen 1.4s ease-out infinite; }
+.press-rail-status.norec .d { background: var(--slate-600); animation: none; box-shadow: none; }
+body.mode-old .press-rail-status .d { background: var(--v-legacy-line); animation: none; box-shadow: none; }
+.press-rail-status .conv { color: var(--gold-700); filter: none; }
+@keyframes vPulseGold { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold-600) 45%, transparent); } 70%, 100% { box-shadow: 0 0 0 8px color-mix(in oklab, var(--gold-600) 0%, transparent); } }
+@keyframes vPulseGreen { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--green-600) 45%, transparent); } 70%, 100% { box-shadow: 0 0 0 8px color-mix(in oklab, var(--green-600) 0%, transparent); } }
+
+/* Funnel, data bits, magnifier: no glow (brand: no crypto glow) */
+.funnel-note { background: var(--surface-subtle); color: var(--v-legacy-ink); border: 1px solid color-mix(in oklab, var(--cream-900) 16%, transparent); box-shadow: var(--shadow-rest); }
+.bit { background: var(--v-accent-line); box-shadow: 0 1px 2px color-mix(in oklab, var(--blue-900) 18%, transparent); }
+.lens svg { filter: drop-shadow(0 4px 8px color-mix(in oklab, var(--blue-900) 16%, transparent)); }
+.lens .catch { background: var(--v-accent-line); box-shadow: none; }
+.lens.scanning .catch { animation: vAnalyze 1.15s ease-in-out; }
+.lens.scanning::after { border-color: color-mix(in oklab, var(--gold-600) 70%, transparent); }
+@keyframes vAnalyze { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.35); } }
+
+/* Cabinet: light default (variants restyle) */
+body.mode-old .cabinet { filter: none; }
+.cabinet { background: var(--surface-base); border: 2px solid var(--v-hair-strong); box-shadow: var(--shadow-hover); }
+.cab-top { background: var(--cream-300); }
+.cab-side { background: color-mix(in oklab, var(--cream-300) 62%, var(--cream-600)); }
+.cab-top .cab-slot { background: color-mix(in oklab, var(--blue-900) 32%, transparent); box-shadow: inset 0 1px 2px color-mix(in oklab, var(--blue-900) 40%, transparent); }
+.drawer-front { background: var(--surface-subtle); border: 1px solid var(--v-hair); box-shadow: var(--shadow-active); }
+.drawer:hover .drawer-front { border-color: var(--v-accent-line); }
+.drawer:focus-visible .drawer-front { outline-color: var(--v-accent-line); }
+.drawer .plate { background: var(--surface-base); box-shadow: inset 0 0 0 1px var(--v-hair-strong); }
+.drawer .handle { background: color-mix(in oklab, var(--blue-900) 20%, transparent); box-shadow: inset 0 -1px 2px color-mix(in oklab, var(--blue-900) 22%, transparent); }
+.drawer:hover .handle { background: var(--v-accent-line); }
+.drawer.pulse .drawer-front { border-color: var(--v-accent-line); box-shadow: 0 0 0 2px color-mix(in oklab, var(--gold-600) 30%, transparent), var(--shadow-active); }
+.drawer.open .drawer-front { border-color: var(--v-accent-line); box-shadow: 0 0 0 2px var(--v-accent-line), var(--shadow-hover); background: var(--gold-50); }
+.drawer.open .drawer-front::before { background: color-mix(in oklab, var(--blue-900) 28%, transparent); box-shadow: none; }
+body.mode-old .drawer:hover .handle { background: var(--v-legacy-line); }
+body.mode-old .drawer:hover .drawer-front { border-color: var(--v-legacy-line); }
+body.mode-old .drawer.open .drawer-front { border-color: var(--v-legacy-line); box-shadow: 0 0 0 2px var(--v-legacy-line), var(--shadow-hover); background: var(--cream-100); }
+body.mode-old .drawer-broken .drawer-front { border-style: dashed; border-color: color-mix(in oklab, var(--cream-900) 35%, transparent); background: color-mix(in oklab, var(--cream-300) 60%, transparent); opacity: .9; }
+body.mode-old .drawer-broken:hover .drawer-front { border-color: color-mix(in oklab, var(--cream-900) 35%, transparent); }
+body.mode-old .drawer-broken .handle, body.mode-old .drawer-broken:hover .handle { background: color-mix(in oklab, var(--cream-900) 24%, transparent); }
+.pull-paper { box-shadow: var(--shadow-hover); }
+
+/* Legacy clutter and the messy spread: ghost shadows instead of black */
+.pstack::before { background: color-mix(in oklab, var(--blue-900) 12%, transparent); }
+.pstack .sh { box-shadow: 0 1px 2px color-mix(in oklab, var(--blue-900) 12%, transparent); }
+.mfolder, .binder { box-shadow: var(--shadow-active); }
+.fall-sheet { box-shadow: var(--shadow-rest); }
+.mpaper { box-shadow: var(--shadow-hover); }
+.mess-close { box-shadow: var(--shadow-rest); }
+
+@media (max-width: 640px) {
+  .press-rail-track > .conn { background-image: linear-gradient(180deg, var(--v-hair-strong) 0 8px, transparent 8px 15px); }
+  .press-rail-track > .conn.on { background-image: linear-gradient(180deg, var(--v-accent-line) 0 8px, transparent 8px 15px); }
+  body.mode-old .press-rail-track > .conn.on { background-image: linear-gradient(180deg, var(--v-legacy-line) 0 8px, transparent 8px 15px); }
+}

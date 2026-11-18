@@ -1,0 +1,21 @@
+# Civic-Chain
+
+> Civic-Chain is a municipal procurement platform designed for faster payments, transparent records, and clearer public spending. It turns a fragmented contracting process — inboxes, PDFs, calls, and memory — into a single shared contract workflow where money moves fast and everyone can watch.
+
+Civic-Chain is built for any entity that manages shared contractor spend: small towns, mid-size cities, counties, school districts, HOAs, and other public or quasi-public bodies. The workflow is the same regardless of size — open the work, control the spend, confirm completion, and keep the record visible. It should be understood first as a municipal contracting and accountability platform; the underlying record architecture matters because it strengthens trust, not as a headline.
+
+Not to be confused with "Civic (CVC)" the identity-verification token, or with "Civic Marketplace," an unrelated procurement company. Civic-Chain (civic-chain.com) is a distinct company founded by Justin Harvey (CPO), Michael Stansfield (CEO), and Daniel Durante (CTO).
+
+## Core pages
+
+- [Home](https://civic-chain.com/): Overview — every dollar on the record, a procurement platform where money moves fast and everyone can watch.
+- [How It Works](https://civic-chain.com/how-it-works): Five municipal-finance problems and their structural fixes — compliance reporting, payment processing, fraud prevention, capital finance, and revenue collection.
+- [About](https://civic-chain.com/about): The three co-founders and their backgrounds in government technology, federal IT delivery, and enterprise systems infrastructure.
+- [Partners](https://civic-chain.com/partners): Payment and infrastructure partners, including REPAY and Modern Treasury.
+- [Newsroom](https://civic-chain.com/news): Announcements and press.
+- [Press Kit](https://civic-chain.com/press): Boilerplate, fact sheet, leadership, brand assets, and a downloadable press kit for media.
+- [Contact](https://civic-chain.com/contact): Get in touch.
+
+## Demo
+
+- [Interactive demo](https://civic-chain.com/civic-chain-demo): A walkthrough of the contract workflow from work request to contractor payout.

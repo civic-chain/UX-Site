@@ -1,0 +1,101 @@
+/* ===== VARIANT A: KEYCAP CARDS ================================================
+   Lifted from civic-chain.com's own cards ("Three clear views", "From request to
+   payout"): a tone surface, a 2px border and an 8px bottom border, both in the
+   card's own ink at 20% / 40%, on the 16px card radius. The rail stops being a
+   dark slab and becomes a quiet tray; the tiles become the same three tone cards
+   the landing page already shows: cream for the town, sky for Civic-Chain, sage
+   for the vendor who gets paid. The cabinet is the same card language.
+   Legacy swaps every coded tone for aged paper (cream + old-paper texture), so
+   the toggle reads as "paper" against "the system", not just a hue change. */
+
+/* The tray */
+.press-rail { background: var(--surface-base); border: 1px solid var(--v-hair); box-shadow: var(--shadow-rest); isolation: isolate; }
+.press-rail::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-2xl); background: url({{A}}texture-blueprint-fine.webp) center / 720px auto repeat; opacity: .3; mix-blend-mode: multiply; z-index: -1; pointer-events: none; }
+body.mode-old .press-rail { background: var(--cream-300); border-color: color-mix(in oklab, var(--cream-900) 14%, transparent); box-shadow: var(--shadow-rest); }
+body.mode-old .press-rail::before { background: url({{A}}texture-old-paper-coarse.webp) center / cover no-repeat; opacity: .35; mix-blend-mode: multiply; }
+
+/* Eyebrow-sized zone labels, like the site's small caps labels */
+.zlabel { font-size: 12px; letter-spacing: var(--tracking-label); top: -26px; }
+
+/* Keycap tiles */
+.acct {
+  --kc: var(--blue-800); --kc-bg: var(--surface-subtle); --chip-bg: var(--blue-300); --chip-fg: var(--blue-800);
+  background: var(--kc-bg); color: var(--kc);
+  border: 2px solid color-mix(in oklab, var(--kc) 20%, transparent);
+  border-bottom-width: 8px; border-bottom-color: color-mix(in oklab, var(--kc) 40%, transparent);
+  border-radius: var(--radius-2xl); box-shadow: none;
+  align-items: flex-start; text-align: left; padding: 20px 22px 18px;
+}
+.acct[data-acct="treasury"] { --kc: var(--tone-cream-fg); --kc-bg: var(--tone-cream-bg); --chip-bg: var(--gold-300); --chip-fg: var(--gold-900); }
+.flip .acct              { --kc: var(--tone-sky-fg);   --kc-bg: var(--tone-sky-bg);   --chip-bg: var(--blue-300); --chip-fg: var(--blue-800); }
+.acct[data-acct="vendor"] { --kc: var(--tone-sage-fg);  --kc-bg: var(--tone-sage-bg);  --chip-bg: var(--green-100); --chip-fg: var(--green-900); }
+.acct .ic, .acct.is-active .ic, .flip.is-active .acct .ic {
+  width: 44px; height: 44px; border-radius: var(--radius-xl);
+  background: var(--chip-bg); color: var(--chip-fg);
+  border: 1px solid color-mix(in oklab, var(--chip-fg) 16%, transparent);
+}
+.acct .ic svg { width: 22px; height: 22px; }
+.acct .nm { font-family: var(--font-display); font-weight: 400; font-size: 23px; line-height: 1.15; color: var(--kc); justify-content: flex-start; text-align: left; }
+.acct .amt { color: var(--kc); justify-content: flex-start; }
+.acct.is-active, .flip.is-active .acct {
+  border-color: color-mix(in oklab, var(--kc) 20%, transparent);
+  border-bottom-color: color-mix(in oklab, var(--kc) 40%, transparent);
+  outline: 2px solid var(--v-accent-line); outline-offset: 2px; box-shadow: var(--shadow-hover);
+}
+
+/* Legacy: every tile is the same aged paper, nothing is coded */
+body.mode-old .acct {
+  --kc: var(--cream-900); --chip-bg: var(--cream-200); --chip-fg: var(--cream-900);
+  background: linear-gradient(color-mix(in oklab, var(--cream-200) 55%, transparent), color-mix(in oklab, var(--cream-200) 55%, transparent)), url({{A}}texture-old-paper-fine.webp) center / cover, var(--cream-200); background-blend-mode: normal, multiply;
+}
+body.mode-old .acct.is-active { outline: 2px solid var(--v-legacy-line); outline-offset: 3px; box-shadow: var(--shadow-rest); }
+body.mode-old .acct.is-active .ic { background: var(--chip-bg); color: var(--chip-fg); }
+
+/* ===== Cabinet: one more keycap card, flat (the site draws no 3D) ===== */
+.cab-side { display: none; }
+.cab-top { transform: none; left: 50%; width: 236px; margin-left: -118px; top: -14px; height: 14px; border-radius: var(--radius-lg) var(--radius-lg) 0 0; background: color-mix(in oklab, var(--blue-300) 80%, var(--blue-600)); }
+.cab-top .cab-slot { top: 5px; width: 184px; }
+.cabinet {
+  --kc: var(--tone-sky-fg);
+  background: var(--tone-sky-bg); color: var(--kc); isolation: isolate;
+  border: 2px solid color-mix(in oklab, var(--kc) 20%, transparent);
+  border-bottom-width: 8px; border-bottom-color: color-mix(in oklab, var(--kc) 40%, transparent);
+  border-radius: var(--radius-2xl); box-shadow: var(--shadow-rest); padding: 22px 20px 20px;
+}
+.cabinet::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-2xl); background: url({{A}}texture-blueprint-coarse.webp) center / cover; opacity: .5; mix-blend-mode: overlay; z-index: -1; pointer-events: none; }
+.drawer-front {
+  --kc: var(--blue-800);
+  background: var(--surface-subtle);
+  border: 2px solid color-mix(in oklab, var(--kc) 16%, transparent);
+  border-bottom-width: 5px; border-bottom-color: color-mix(in oklab, var(--kc) 32%, transparent);
+  border-radius: var(--radius-xl); box-shadow: none;
+}
+.drawer .plate { background: transparent; box-shadow: none; padding: 2px 8px; }
+.drawer .plate .nm { color: var(--v-ink); }
+.drawer .handle { width: 44px; height: 6px; }
+
+body.mode-old .cab-top { background: color-mix(in oklab, var(--cream-300) 70%, var(--cream-600)); }
+body.mode-old .cabinet { --kc: var(--cream-900); background: var(--cream-300); }
+body.mode-old .cabinet::before { background-image: url({{A}}texture-old-paper-coarse.webp); opacity: .35; mix-blend-mode: multiply; }
+body.mode-old .drawer .handle { background: color-mix(in oklab, var(--cream-900) 24%, transparent); }
+body.mode-old .drawer-front { --kc: var(--cream-900); background: linear-gradient(color-mix(in oklab, var(--cream-200) 55%, transparent), color-mix(in oklab, var(--cream-200) 55%, transparent)), url({{A}}texture-old-paper-fine.webp) center / cover, var(--cream-200); background-blend-mode: normal, multiply; }
+body.mode-old .drawer .plate .nm { color: var(--v-legacy-ink); }
+
+@media (max-width: 640px) {
+  .acct { padding: 16px 16px 14px; }
+  .acct .nm { font-size: 20px; }
+  .acct .ic { margin-bottom: 10px; }
+  .cabinet { padding: 26px 12px 14px; }
+}
+
+/* Between the stacked phone layout and a roomy desktop the three tiles are only
+   ~170px wide, where 23px serif names wrapped to three lines and pushed the
+   legacy scene past the 1400px iframe. */
+@media (min-width: 641px) and (max-width: 960px) {
+  .acct { padding: 18px 14px 16px; }
+  .acct .nm { font-size: 18px; }
+}
+@media (max-width: 360px) {
+  .acct .nm { font-size: 18px; }
+  .acct { padding: 14px 14px 12px; }
+}

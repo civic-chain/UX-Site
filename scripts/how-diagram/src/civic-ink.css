@@ -1,0 +1,19 @@
+/* civic-chain: ink */
+html[data-cc="ink"] body:not(.mode-old) .press-rail { background: var(--blue-800); border-color: color-mix(in oklab, var(--blue-900) 40%, transparent); }
+html[data-cc="ink"] body:not(.mode-old) .press-rail::before { background: url({{A}}texture-banknote-fine.webp) center / cover no-repeat; filter: invert(1); opacity: .32; mix-blend-mode: screen; }
+html[data-cc="ink"] body:not(.mode-old) .acct[data-acct="treasury"] { --kc: var(--cream-50); --kc-bg: var(--tone-ink-bg); --chip-bg: color-mix(in oklab, var(--cream-50) 14%, transparent); --chip-fg: var(--cream-50); }
+html[data-cc="ink"] body:not(.mode-old) .flip .acct { --kc: var(--cream-50); --kc-bg: var(--tone-ink-bg); --chip-bg: color-mix(in oklab, var(--cream-50) 14%, transparent); --chip-fg: var(--cream-50); }
+html[data-cc="ink"] body:not(.mode-old) .acct[data-acct="vendor"] { --kc: var(--cream-50); --kc-bg: var(--tone-ink-bg); --chip-bg: color-mix(in oklab, var(--cream-50) 14%, transparent); --chip-fg: var(--cream-50); }
+html[data-cc="ink"] body:not(.mode-old) .cabinet { --kc: var(--cream-50); background: var(--tone-ink-bg); }
+html[data-cc="ink"] body:not(.mode-old) .cabinet::before { background: url({{A}}texture-banknote-fine.webp) center / cover no-repeat; filter: invert(1); opacity: .32; mix-blend-mode: screen; }
+html[data-cc="ink"] body:not(.mode-old) .cab-top { background: color-mix(in oklab, var(--blue-700) 70%, var(--blue-300)); }
+html[data-cc="ink"] body:not(.mode-old) .zlabel { color: color-mix(in oklab, var(--cream-50) 78%, transparent); }
+html[data-cc="ink"] body:not(.mode-old) .fbo-tag { color: var(--gold-300); }
+html[data-cc="ink"] body:not(.mode-old) .term { border-bottom-color: var(--gold-300); }
+html[data-cc="ink"] body:not(.mode-old) .conn { background-image: linear-gradient(90deg, color-mix(in oklab, var(--cream-50) 30%, transparent) 0 8px, transparent 8px 15px); }
+html[data-cc="ink"] body:not(.mode-old) .conn.on { background-image: linear-gradient(90deg, var(--gold-300) 0 8px, transparent 8px 15px); }
+html[data-cc="ink"] body:not(.mode-old) .acct.is-active, html[data-cc="ink"] body:not(.mode-old) .flip.is-active .acct { outline-color: var(--gold-300); }
+@media (max-width: 640px) {
+  html[data-cc="ink"] body:not(.mode-old) .press-rail-track > .conn { background-image: linear-gradient(180deg, color-mix(in oklab, var(--cream-50) 30%, transparent) 0 8px, transparent 8px 15px); }
+  html[data-cc="ink"] body:not(.mode-old) .press-rail-track > .conn.on { background-image: linear-gradient(180deg, var(--gold-300) 0 8px, transparent 8px 15px); }
+}

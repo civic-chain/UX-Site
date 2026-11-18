@@ -1,0 +1,4 @@
+interface:
+  display_name: "Civicchain Frontend Router"
+  short_description: "Fresh-session frontend map for civicchain"
+  default_prompt: "Use $civicchain-frontend-router to orient a fresh agent to this repo before editing a landing section, page, variant, or visual system."

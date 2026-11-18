@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow">
+    <title>Internal Directory — Civic-Chain</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0b1245;
+            --blue: #131f86;
+            --green: #2d7a4f;
+            --cyan: #1a2a95;
+            --red: #8f2a3b;
+            --purple: #3a2a7a;
+            --light-gray: #c8c4b0;
+            --dark-gray: #0f1a6e;
+            --light-blue: #1a2a95;
+            --light-green: #dfc28c;
+            --light-cyan: #a8b8d4;
+            --light-red: #c45a6a;
+            --yellow: #dfc28c;
+            --white: #f3f1e8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--black);
+            color: var(--light-gray);
+            min-height: 100vh;
+        }
+
+        /* ── Gate screen ────────────────────────────────────────── */
+
+        #gate {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 24px;
+        }
+
+        #gate::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('/brand/civic-logo-hero.svg');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 60%;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .gate-card {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            max-width: 380px;
+            border: 2px solid var(--blue);
+            background: rgba(19, 31, 134, 0.15);
+        }
+
+        .gate-logo-wrap {
+            padding: 32px 32px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            border-bottom: 1px solid rgba(223, 194, 140, 0.2);
+        }
+
+        .gate-logo {
+            width: 72px;
+            height: 72px;
+            opacity: 0.85;
+            filter: brightness(0) invert(1) sepia(1) saturate(0.4) hue-rotate(0deg);
+        }
+
+        .gate-title {
+            font-family: 'DM Serif Text', Georgia, serif;
+            font-size: 22px;
+            color: var(--yellow);
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .gate-subtitle {
+            font-size: 11px;
+            color: rgba(243, 241, 232, 0.45);
+            font-style: italic;
+            text-align: center;
+            margin-top: -10px;
+        }
+
+        .gate-fields {
+            padding: 24px 28px 28px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .gate-input {
+            width: 100%;
+            background: var(--black);
+            border: 2px solid var(--cyan);
+            color: var(--light-green);
+            padding: 10px 14px;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            letter-spacing: 3px;
+            outline: none;
+            text-align: center;
+        }
+
+        .gate-input:focus {
+            border-color: var(--light-cyan);
+        }
+
+        .gate-input::placeholder {
+            color: rgba(168, 184, 212, 0.35);
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+
+        .gate-btn {
+            width: 100%;
+            background: var(--blue);
+            color: var(--yellow);
+            border: 2px solid var(--light-blue);
+            padding: 11px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .gate-btn:hover { background: var(--light-blue); color: var(--white); }
+        .gate-btn:active { transform: scale(0.98); }
+
+        .gate-error {
+            font-size: 12px;
+            color: var(--light-red);
+            text-align: center;
+            font-style: italic;
+            display: none;
+        }
+
+        .gate-back {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: var(--light-cyan);
+            text-decoration: none;
+            font-size: 13px;
+            z-index: 1001;
+        }
+
+        .gate-back:hover { color: var(--yellow); }
+
+        /* ── Main directory ─────────────────────────────────────── */
+
+        #mainContent {
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            max-width: 900px;
+            margin: 0 auto;
+            border-left: 2px solid var(--blue);
+            border-right: 2px solid var(--blue);
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('/brand/civic-logo-hero.svg');
+            background-repeat: no-repeat;
+            background-position: center 38%;
+            background-size: 55%;
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header {
+            background: var(--blue);
+            color: var(--yellow);
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid rgba(223, 194, 140, 0.3);
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-family: 'DM Serif Text', Georgia, serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            color: rgba(243, 241, 232, 0.55);
+            margin-top: 5px;
+            font-style: italic;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0;
+        }
+
+        .status-bar {
+            background: var(--dark-gray);
+            padding: 8px 15px;
+            border-bottom: 1px solid rgba(26, 42, 149, 0.4);
+            font-size: 12px;
+            color: var(--light-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sign-out-btn {
+            background: none;
+            border: none;
+            color: rgba(168, 184, 212, 0.5);
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 2px 0;
+        }
+
+        .sign-out-btn:hover { color: var(--light-red); }
+
+        .messages-container {
+            flex: 1;
+            padding: 15px;
+            background: var(--black);
+            position: relative;
+            z-index: 1;
+        }
+
+        .system-message {
+            text-align: center;
+            color: var(--yellow);
+            font-size: 11px;
+            font-style: italic;
+            margin: 20px 0 10px;
+            padding: 5px;
+            border-top: 1px dashed var(--dark-gray);
+            border-bottom: 1px dashed var(--dark-gray);
+            letter-spacing: 1px;
+        }
+
+        .system-message:first-child { margin-top: 4px; }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-left: 3px solid var(--blue);
+            background: rgba(19, 31, 134, 0.12);
+            text-decoration: none;
+            display: block;
+            transition: background 0.15s;
+        }
+
+        .message:hover                { background: rgba(19, 31, 134, 0.22); }
+        .message.public               { border-left-color: var(--green);     background: rgba(45, 122, 79, 0.09); }
+        .message.public:hover         { background: rgba(45, 122, 79, 0.16); }
+        .message.demo                 { border-left-color: var(--yellow);    background: rgba(223, 194, 140, 0.06); }
+        .message.demo:hover           { background: rgba(223, 194, 140, 0.12); }
+        .message.snapshot             { border-left-color: #6a5acd;          background: rgba(106, 90, 205, 0.08); }
+        .message.snapshot:hover       { background: rgba(106, 90, 205, 0.15); }
+        .message.dev                  { border-left-color: var(--light-red); background: rgba(196, 90, 106, 0.08); }
+        .message.dev:hover            { background: rgba(196, 90, 106, 0.15); }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .message-route {
+            color: var(--light-cyan);
+            font-weight: bold;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+
+        .tag {
+            font-size: 10px;
+            padding: 2px 6px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            font-style: normal;
+        }
+
+        .tag.public   { background: rgba(45, 122, 79, 0.25);   color: #7dcf96;           border: 1px solid #2d7a4f; }
+        .tag.noindex  { background: rgba(143, 42, 59, 0.25);   color: var(--light-red);  border: 1px solid var(--red); }
+        .tag.gated    { background: rgba(223, 194, 140, 0.15); color: var(--yellow);     border: 1px solid rgba(223, 194, 140, 0.4); }
+        .tag.nogated  { background: rgba(106, 90, 205, 0.2);   color: #a89ae0;           border: 1px solid #6a5acd; }
+
+        .message-title {
+            color: var(--white);
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .message-desc {
+            color: var(--light-gray);
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .password-line { font-size: 12px; margin-top: 6px; }
+        .password-label { color: var(--light-cyan); }
+
+        .password-value {
+            color: var(--yellow);
+            font-weight: bold;
+            background: rgba(223, 194, 140, 0.1);
+            padding: 1px 7px;
+            border: 1px solid rgba(223, 194, 140, 0.25);
+            user-select: all;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            color: var(--light-cyan);
+            text-decoration: none;
+            font-size: 13px;
+            z-index: 100;
+        }
+
+        .back-link:hover { color: var(--yellow); }
+
+        .footer {
+            padding: 12px 15px;
+            border-top: 1px dashed var(--dark-gray);
+            font-size: 11px;
+            color: rgba(200, 196, 176, 0.3);
+            text-align: center;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Matrix screen ──────────────────────────────────────── */
+
+        #matrixScreen {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1002;
+            background: #000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.45s;
+        }
+
+        #matrixCanvas {
+            position: absolute;
+            inset: 0;
+        }
+
+        #matrixText {
+            position: relative;
+            z-index: 1;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(40px, 9vw, 80px);
+            font-weight: bold;
+            letter-spacing: 8px;
+            color: var(--yellow);
+            text-shadow: 0 0 18px var(--yellow), 0 0 40px rgba(223,194,140,0.45);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        #matrixSub {
+            position: relative;
+            z-index: 1;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(12px, 2vw, 14px);
+            letter-spacing: 4px;
+            color: #0f0;
+            margin-top: 14px;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        @media (max-width: 768px) {
+            .container { border-left: none; border-right: none; }
+            .back-link { font-size: 15px; padding: 10px; top: 8px; left: 8px; }
+            .gate-back { font-size: 15px; padding: 10px; top: 8px; left: 8px; }
+            .header { font-size: 17px; padding: 12px; }
+            .gate-card { max-width: 100%; }
+            .gate-fields { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Gate screen ──────────────────────────────────────────── -->
+
+    <a href="/" class="gate-back">← Back</a>
+
+    <div id="gate">
+        <div class="gate-card">
+            <div class="gate-logo-wrap">
+                <img src="/brand/civic-logo-hero.svg" class="gate-logo" alt="Civic-Chain">
+                <div class="gate-title">Civic-Chain</div>
+                <div class="gate-subtitle">Internal Registry</div>
+            </div>
+            <div class="gate-fields">
+                <input type="password" id="gateInput" class="gate-input" placeholder="Access code" autocomplete="off" maxlength="32">
+                <button class="gate-btn" onclick="checkGate()">ENTER</button>
+                <div id="gateError" class="gate-error">Incorrect access code.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Matrix screen ─────────────────────────────────────────── -->
+
+    <div id="matrixScreen">
+        <canvas id="matrixCanvas"></canvas>
+        <div id="matrixText">I'M IN.</div>
+        <div id="matrixSub">access granted &mdash; loading directory&hellip;</div>
+    </div>
+
+    <!-- ── Directory ────────────────────────────────────────────── -->
+
+    <div id="mainContent">
+        <a href="/" class="back-link">← Back</a>
+
+        <div class="container">
+
+            <div class="header">
+                Internal Directory.
+                <div class="subtitle">Civic-Chain · authorized access only · do not share externally</div>
+            </div>
+
+            <div class="status-bar">
+                <span>● 22 routes · 2 standalone pages</span>
+                <button class="sign-out-btn" onclick="signOut()">sign out</button>
+            </div>
+
+            <div class="messages-container">
+
+                <div class="system-message">— PUBLIC — indexed by search engines —</div>
+
+                <a href="/" class="message public">
+                    <div class="message-header">
+                        <span class="message-route">/</span>
+                        <div class="tags"><span class="tag public">PUBLIC</span></div>
+                    </div>
+                    <div class="message-title">Landing Page</div>
+                    <div class="message-desc">Main marketing page. Primary entry point for all visitors.</div>
+                </a>
+
+                <a href="/how-it-works" class="message public">
+                    <div class="message-header">
+                        <span class="message-route">/how-it-works</span>
+                        <div class="tags"><span class="tag public">PUBLIC</span></div>
+                    </div>
+                    <div class="message-title">How It Works</div>
+                    <div class="message-desc">Five pain points, five Civic-Chain solutions. Flip-card explainer: TLaaS, Stablecoin Sandwich, Geo-Verification, Bond Management, Excise Automation. Cards link to demos.</div>
+                </a>
+
+                <a href="/how" class="message public">
+                    <div class="message-header">
+                        <span class="message-route">/how</span>
+                        <div class="tags"><span class="tag public">PUBLIC</span></div>
+                    </div>
+                    <div class="message-title">How the Money Moves</div>
+                    <div class="message-desc">Standalone mechanism page — 6-step contract flow, record-flow animation, and patent-derived architecture pillars. No longer a redirect to /how-it-works; it is now a distinct live page.</div>
+                </a>
+
+                <a href="/about" class="message public">
+                    <div class="message-header">
+                        <span class="message-route">/about</span>
+                        <div class="tags"><span class="tag public">PUBLIC</span></div>
+                    </div>
+                    <div class="message-title">About</div>
+                    <div class="message-desc">Company background and mission.</div>
+                </a>
+
+                <a href="/contact" class="message public">
+                    <div class="message-header">
+                        <span class="message-route">/contact</span>
+                        <div class="tags"><span class="tag public">PUBLIC</span></div>
+                    </div>
+                    <div class="message-title">Contact</div>
+                    <div class="message-desc">Inbound contact form.</div>
+                </a>
+
+                <a href="/brand" class="message public">
+                    <div class="message-header">
+                        <span class="message-route">/brand</span>
+                        <div class="tags"><span class="tag public">PUBLIC</span></div>
+                    </div>
+                    <div class="message-title">Brand</div>
+                    <div class="message-desc">Brand assets and identity guidelines.</div>
+                </a>
+
+                <a href="/resources" class="message public">
+                    <div class="message-header">
+                        <span class="message-route">/resources</span>
+                        <div class="tags"><span class="tag public">PUBLIC</span></div>
+                    </div>
+                    <div class="message-title">Resources</div>
+                    <div class="message-desc">Article index.</div>
+                </a>
+
+                <a href="/resources/municipal-payment-delays" class="message public">
+                    <div class="message-header">
+                        <span class="message-route">/resources/municipal-payment-delays</span>
+                        <div class="tags"><span class="tag public">PUBLIC</span></div>
+                    </div>
+                    <div class="message-title">Why Municipalities Experience Payment Delays</div>
+                    <div class="message-desc">Published article. SEO-targeted.</div>
+                </a>
+
+                <div class="system-message">— DEMOS — password-gated · noindex —</div>
+
+                <a href="/tlaas" class="message demo">
+                    <div class="message-header">
+                        <span class="message-route">/tlaas</span>
+                        <div class="tags"><span class="tag gated">GATED</span><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">TLaaS Demo</div>
+                    <div class="message-desc">Transparency Layer as a Service — REPAY partnership demo. Three orgs across healthcare, municipalities, and enterprise.</div>
+                    <div class="password-line"><span class="password-label">password: </span><span class="password-value">repay2026</span></div>
+                </a>
+
+                <a href="/wizard" class="message demo">
+                    <div class="message-header">
+                        <span class="message-route">/wizard</span>
+                        <div class="tags"><span class="tag gated">GATED</span></div>
+                    </div>
+                    <div class="message-title">Municipality Onboarding Wizard</div>
+                    <div class="message-desc">Step-by-step onboarding guide for municipalities going live on Civic-Chain.</div>
+                    <div class="password-line"><span class="password-label">password: </span><span class="password-value">wizard2026</span></div>
+                </a>
+
+                <a href="/nh" class="message demo">
+                    <div class="message-header">
+                        <span class="message-route">/nh</span>
+                        <div class="tags"><span class="tag gated">GATED</span><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">New Hampshire Info Page</div>
+                    <div class="message-desc">Co-branded public education page for New Hampshire, endorsed by Robbie Mahrou (Independent, NH-02). Plain-English explainer of where tax dollars go, with an illustrative modeled ROI calculator and honest FAQ. USD-first, not cryptocurrency; carries a soft GENIUS Act signal. Also ships as the standalone nh-portal-demo bundle for separate hosting.</div>
+                    <div class="password-line"><span class="password-label">password: </span><span class="password-value">CivicChain2026</span></div>
+                </a>
+
+                <a href="/maine" class="message demo">
+                    <div class="message-header">
+                        <span class="message-route">/maine</span>
+                        <div class="tags"><span class="tag gated">GATED</span><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">Maine Info Page</div>
+                    <div class="message-desc">Maine-localized sibling of the NH info page. Same plain-English explainer of where tax dollars go, illustrative modeled ROI calculator, and honest FAQ, adapted for Maine: FOAA (not NH Right-to-Know), Maine towns and select-board framing. USD-first, not cryptocurrency; soft GENIUS Act signal.</div>
+                    <div class="password-line"><span class="password-label">password: </span><span class="password-value">CivicChain2026</span></div>
+                </a>
+
+                <a href="/trl" class="message demo">
+                    <div class="message-header">
+                        <span class="message-route">/trl</span>
+                        <div class="tags"><span class="tag gated">GATED</span><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">Target Responsibility Ledger — Binlan District</div>
+                    <div class="message-desc">Tamper-evident, citizen-verifiable Target Responsibility System demo for the theoretical Binlan District. Consortium-anchored commitments, geo-verified resident satisfaction, live tamper test. No payments, no value transfer. Also ships as the standalone trl-demo bundle for separate hosting.</div>
+                    <div class="password-line"><span class="password-label">password: </span><span class="password-value">CivicChain2026</span></div>
+                </a>
+
+                <div class="system-message">— SNAPSHOTS — no gate · noindex recommended —</div>
+
+                <a href="/admin" class="message snapshot">
+                    <div class="message-header">
+                        <span class="message-route">/admin</span>
+                        <div class="tags"><span class="tag nogated">NO GATE</span></div>
+                    </div>
+                    <div class="message-title">Admin Console</div>
+                    <div class="message-desc">Frozen demo snapshot of the municipality admin interface. No password — consider adding a gate or noindex.</div>
+                </a>
+
+                <a href="/citizen" class="message snapshot">
+                    <div class="message-header">
+                        <span class="message-route">/citizen</span>
+                        <div class="tags"><span class="tag nogated">NO GATE</span></div>
+                    </div>
+                    <div class="message-title">Public Ledger — Town of Any Town</div>
+                    <div class="message-desc">Frozen snapshot of the citizen-facing public ledger view. No password.</div>
+                </a>
+
+                <a href="/vendor" class="message snapshot">
+                    <div class="message-header">
+                        <span class="message-route">/vendor</span>
+                        <div class="tags"><span class="tag nogated">NO GATE</span></div>
+                    </div>
+                    <div class="message-title">Vendor Portal</div>
+                    <div class="message-desc">Frozen snapshot of the vendor-facing portal. No password.</div>
+                </a>
+
+                <a href="/civic-chain-demo" class="message snapshot">
+                    <div class="message-header">
+                        <span class="message-route">/civic-chain-demo</span>
+                        <div class="tags"><span class="tag nogated">NO GATE</span></div>
+                    </div>
+                    <div class="message-title">Demo Console — Town of Any Town, Maine</div>
+                    <div class="message-desc">Live Civic-Chain dashboard snapshot. General fund, TIF tracking, vendor management, and bond reserve — all pre-seeded. Linked from the /how-it-works TLaaS card. No password.</div>
+                </a>
+
+                <a href="/civic-chain-demo/live" class="message demo">
+                    <div class="message-header">
+                        <span class="message-route">/civic-chain-demo/live?audience=</span>
+                        <div class="tags"><span class="tag nogated">NO GATE</span><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">Live Presenter Demo</div>
+                    <div class="message-desc">Dedicated presenter-mode route — always runs with HUD and Director active. Pass ?audience=hero|finance|auditor|leadership. Separate from the regular /civic-chain-demo so there is no URL collision.</div>
+                </a>
+
+                <a href="/civic-chain-demo/present" class="message demo">
+                    <div class="message-header">
+                        <span class="message-route">/civic-chain-demo/present</span>
+                        <div class="tags"><span class="tag gated">GATED</span><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">Demo Presenter — Track Selector</div>
+                    <div class="message-desc">Guided demo engine launch page. Select an audience track (Hero Loop, Finance Office, Auditor, Leadership) and launch into /civic-chain-demo/live — a dedicated presenter route with HUD, beat-by-beat narration, ambient liveness, and hotkey controls (Space/→ advance, ← rewind, Esc panic).</div>
+                    <div class="password-line"><span class="password-label">password: </span><span class="password-value">present2026</span></div>
+                </a>
+
+                <div class="system-message">— STANDALONE — public/ directory, not Next.js routes —</div>
+
+                <a href="/sanctum-9a4f2e8b" class="message dev">
+                    <div class="message-header">
+                        <span class="message-route">/sanctum-9a4f2e8b</span>
+                        <div class="tags"><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">Live Support</div>
+                    <div class="message-desc">Firebase-backed live chat. Linked from the landing page headline dot. Hidden URL.</div>
+                </a>
+
+                <a href="/registry-4e2a8f1d" class="message dev">
+                    <div class="message-header">
+                        <span class="message-route">/registry-4e2a8f1d</span>
+                        <div class="tags"><span class="tag gated">GATED</span><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">Internal Directory</div>
+                    <div class="message-desc">You are here.</div>
+                    <div class="password-line"><span class="password-label">password: </span><span class="password-value">6942069</span></div>
+                </a>
+
+                <a href="/flyer" class="message demo">
+                    <div class="message-header">
+                        <span class="message-route">/flyer</span>
+                        <div class="tags"><span class="tag nogated">NO GATE</span><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">TLaaS Promo Flyer — 4 Service Tiers</div>
+                    <div class="message-desc">Printable one-pager for CEO sales use. Shows all four tiers (Transparency Pilot, Community, Professional, Enterprise) with pricing, features, and adoption flow. Print → Save as PDF from browser. Not linked publicly.</div>
+                </a>
+
+                <div class="system-message">— DEV — internal tooling —</div>
+
+                <a href="/landing-v1" class="message dev">
+                    <div class="message-header">
+                        <span class="message-route">/landing-v1</span>
+                        <div class="tags"><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">Landing V1</div>
+                    <div class="message-desc">Dev preview — alternate section layout for the home page. Not publicly linked.</div>
+                </a>
+
+                <a href="/landing-v2" class="message dev">
+                    <div class="message-header">
+                        <span class="message-route">/landing-v2</span>
+                        <div class="tags"><span class="tag noindex">NOINDEX</span></div>
+                    </div>
+                    <div class="message-title">Landing V2</div>
+                    <div class="message-desc">Dev preview — alternate section layout for the home page. Not publicly linked.</div>
+                </a>
+
+                <div class="system-message">— end of directory —</div>
+
+            </div>
+
+            <div class="footer">
+                Not linked publicly · noindexed · share the URL directly · civic-chain.com
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const GATE_KEY  = 'registry_auth_v1';
+        const GATE_PASS = '6942069';
+
+        function checkGate() {
+            const val = document.getElementById('gateInput').value;
+            if (val === GATE_PASS) {
+                localStorage.setItem(GATE_KEY, '1');
+                document.getElementById('gate').style.display = 'none';
+                runMatrixAndEnter();
+            } else {
+                const err = document.getElementById('gateError');
+                err.style.display = 'block';
+                document.getElementById('gateInput').value = '';
+                document.getElementById('gateInput').focus();
+                setTimeout(() => { err.style.display = 'none'; }, 3000);
+            }
+        }
+
+        function runMatrixAndEnter() {
+            const screen = document.getElementById('matrixScreen');
+            const canvas = document.getElementById('matrixCanvas');
+            const matrixText = document.getElementById('matrixText');
+            const matrixSub  = document.getElementById('matrixSub');
+
+            screen.style.display = 'flex';
+            screen.style.opacity  = '1';
+
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const ctx   = canvas.getContext('2d');
+            // Hermetic Hymn of Poimandres — Manly P. Hall, Secret Teachings of All Ages (1928), pp.105-107
+            // Classical Japanese translation (54% kanji) — translatable back to the original hymn
+            const chars = '聖哉神よ万物之父よ元始以前に存在する唯一者よ聖哉神よ自ら産みし力を以て御意志を遂行し成就する者よ聖哉神よ知られる事を定め自ら啓示する者にのみ知られる者よ聖哉御言葉を以て万物を定めし者よ聖哉万物之自然が其之像たる者よ聖哉下位之自然に形造られざる者よ聖哉万力より強き者よ聖哉万徳より偉大なる者よ聖哉万賛より優れし者よ清き魂と汝に向かいて伸べたる心より此之誠之供物を受け入れたまえ語り得ぬ者よ言表し得ぬ者よ沈黙を以て讃えらるべき者よ汝之知識より外れる事なく無知之中に在る兄弟汝之子等を照らす事が出来る様汝之慈悲を以て我を顧みたまえ故に我は汝を信じ汝之証人と成り平和と信頼を以て汝之光と命之中へ去る祝福されよ父よ汝が形造りし人間は汝が御言葉と真理を以て他者を聖化する力を与えし如く汝と共に聖化されんとす地上之人々よ元素より生まれし者たちよ神人之霊を内に宿す者たちよ無知之眠りより目覚めよ冷静に思慮深くあれ汝之家は地にあらず光之中に在る事を悟れ不滅への道は険しく之を見出す者は少なし此れが善之道であり知恵を有する者のみに啓示される';
+            const size  = 15;
+            const cols  = Math.floor(canvas.width / size);
+            const drops = new Array(cols).fill(1);
+
+            let frame = 0;
+
+            const tick = setInterval(() => {
+                ctx.fillStyle = 'rgba(0,0,0,0.06)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < drops.length; i++) {
+                    const bright = Math.random() > 0.95;
+                    ctx.fillStyle = bright ? '#aaffaa' : '#00cc33';
+                    ctx.font = size + 'px Courier New';
+                    ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * size, drops[i] * size);
+                    if (drops[i] * size > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                    drops[i]++;
+                }
+
+                frame++;
+
+                if (frame === 9) {
+                    matrixText.style.opacity = '1';
+                    matrixSub.style.opacity  = '1';
+                }
+
+                if (frame === 50) {
+                    clearInterval(tick);
+                    screen.style.opacity = '0';
+                    setTimeout(() => {
+                        screen.style.display = 'none';
+                        matrixText.style.opacity = '0';
+                        matrixSub.style.opacity  = '0';
+                        document.getElementById('mainContent').style.display = 'block';
+                    }, 450);
+                }
+            }, 50);
+        }
+
+        function signOut() {
+            localStorage.removeItem(GATE_KEY);
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('gate').style.display = 'flex';
+            document.getElementById('gateInput').value = '';
+            document.getElementById('gateInput').focus();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem(GATE_KEY) === '1') {
+                document.getElementById('gate').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            } else {
+                document.getElementById('gateInput').focus();
+            }
+
+            document.getElementById('gateInput').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') checkGate();
+            });
+        });
+    </script>
+
+</body>
+</html>

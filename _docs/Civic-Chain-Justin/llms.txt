@@ -1,0 +1,37 @@
+# Civic Chain
+
+> Civic Chain is a municipal procurement and payment transparency platform built on XRPL and RLUSD stablecoin rails. It replaces fragmented contract workflows with a shared ledger that gives town staff, contractors, and residents a live view of every contract dollar — from bid to payout.
+
+## Product
+
+- [Homepage](https://civic-chain.com/): Platform overview, problem statement, how it works, and key statistics.
+- [Public Spending Ledger](https://civic-chain.com/citizen): Citizen-facing live contract records and spending data. No login required.
+- [Contractor Portal](https://civic-chain.com/vendor): Vendor payment tracking, card activity, and contract status.
+- [Contact](https://civic-chain.com/contact): Inquiries for municipalities, counties, school districts, and pilot programs.
+- [Roadmap](https://civic-chain.com/roadmap): Planned platform features and development timeline.
+
+## Key Claims
+
+- Vendor payments settle in 4 seconds on XRPL versus 1 to 3 business days on ACH.
+- Transaction cost under $0.001 versus $25 to $50 per wire transfer.
+- Late payments cost the U.S. construction industry $208 billion in a single year (Rabbet, 2022).
+- Roughly 25% of global government procurement spending is lost to inefficiency, approximately $1 trillion per year (World Bank, 2022).
+- Built for towns, cities, counties, school districts, HOAs, and any public or quasi-public body that manages shared contractor spend.
+
+## How It Works
+
+1. Municipality publishes a contract request with budget, timeline, and a public starting record.
+2. Vendor is awarded the contract. Spend rules and card funding are tied to the contract record on day one.
+3. Work is confirmed before payout moves forward. The full record stays visible on a public ledger throughout.
+
+## Technology
+
+- XRP Ledger (XRPL) for 4-second payment settlement at sub-cent transaction cost.
+- RLUSD stablecoin for stable-value vendor disbursements.
+- Three role-based portals: Town staff, Contractor, and Public.
+- Public ledger accessible with no login, no records request, no call to town hall.
+
+## Contact
+
+- Email: info@civic-chain.com
+- Website: https://civic-chain.com

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /sanctum-9a4f2e8b.html
+
+Sitemap: https://civic-chain.com/sitemap.xml

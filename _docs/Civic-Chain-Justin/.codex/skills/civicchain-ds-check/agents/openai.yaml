@@ -1,0 +1,6 @@
+interface:
+  display_name: "Civicchain DS Check"
+  short_description: "Ripgrep audit for repo-specific design-system violations"
+  default_prompt: "Use $civicchain-ds-check after TSX edits in this repo to run the design-system grep audit and report violations with file:line evidence."
+policy:
+  allow_implicit_invocation: true

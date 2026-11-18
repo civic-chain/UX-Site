@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<!--
+
+   ##### ####   ###  #####  ###  #   #
+     #   #   #   #     #   #   # ##  #
+     #   ####    #     #   #   # # # #
+     #   # #     #     #   #   # #  ##
+     #   #   #  ###    #    ###  #   #
+
+   Design & Creative Direction
+   https://www.youtube.com/@triton2030
+
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Civic-Chain — Brand Kit</title>
+  <script>
+    (function() {
+      if (sessionStorage.getItem('bk_auth') !== '1') {
+        document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('bk-gate').style.display = 'flex';
+          document.getElementById('bk-content').style.display = 'none';
+        });
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #131F86;
+      --cream:      #F3F1E8;
+      --card:       #FBF8F0;
+      --surface:    #EFE9DF;
+      --secondary:  #DBE2EE;
+      --muted-fg:   #5C6382;
+      --t-cream:    #FBF8F0;
+      --t-dusty:    #DBE3EE;
+      --t-gold:     #DFC28C;
+      --t-sage:     #D5DFD5;
+      --t-slate:    #626C89;
+      --t-cream-fg: #131F86;
+      --t-dusty-fg: #1C2F74;
+      --t-gold-fg:  #352613;
+      --t-sage-fg:  #223440;
+      --t-slate-fg: #F7F4ED;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--blue);
+      line-height: 1.6;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    .page { max-width: 56rem; margin: 0 auto; }
+
+    /* ── Header ── */
+    .kit-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(19,31,134,0.14);
+      margin-bottom: 3.5rem;
+    }
+    .kit-header img { height: 2rem; }
+    .kit-meta { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-fg); }
+
+    /* ── Section ── */
+    .section { margin-bottom: 3.5rem; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted-fg);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(19,31,134,0.1);
+    }
+
+    /* ── Positioning ── */
+    .position-block {
+      background: var(--blue);
+      color: var(--cream);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+    }
+    .position-headline {
+      font-family: 'DM Serif Text', serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .position-body { font-size: 1rem; opacity: 0.78; max-width: 38rem; }
+
+    /* ── Color swatches ── */
+    .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 1rem; }
+    .swatch {
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid rgba(19,31,134,0.1);
+    }
+    .swatch-color { height: 5rem; }
+    .swatch-info { padding: 0.625rem 0.75rem; background: var(--card); }
+    .swatch-name { font-size: 0.75rem; font-weight: 600; display: block; }
+    .swatch-hex  { font-size: 0.6875rem; font-family: monospace; color: var(--muted-fg); }
+
+    .swatch-grid-tone { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .tone-swatch {
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      display: grid;
+      gap: 0.25rem;
+    }
+    .tone-name { font-size: 0.75rem; font-weight: 600; }
+    .tone-bg-hex, .tone-fg-hex { font-size: 0.6875rem; font-family: monospace; opacity: 0.65; }
+
+    /* ── Typography ── */
+    .type-row { margin-bottom: 2rem; }
+    .type-specimen { margin-bottom: 0.5rem; }
+    .type-display-specimen {
+      font-family: 'DM Serif Text', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+    .type-heading-specimen {
+      font-family: 'DM Serif Text', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .type-body-specimen { font-size: 1rem; line-height: 1.75rem; max-width: 38rem; }
+    .type-label-specimen { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+    .type-meta { font-size: 0.6875rem; color: var(--muted-fg); font-family: monospace; }
+
+    /* ── Logos ── */
+    .logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1.25rem; }
+    .logo-card {
+      border-radius: 1rem;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      border: 1px solid rgba(19,31,134,0.1);
+    }
+    .logo-card.on-light { background: var(--card); }
+    .logo-card.on-dark  { background: var(--blue); }
+    .logo-card.on-cream { background: var(--cream); }
+    .logo-card img { max-height: 2.5rem; width: auto; }
+    .logo-card img.icon { max-height: 3.5rem; }
+    .logo-card-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+    .logo-card.on-dark .logo-card-label { color: rgba(243,241,232,0.5); }
+    .logo-card:not(.on-dark) .logo-card-label { color: var(--muted-fg); }
+
+    /* ── Download note ── */
+    .download-note {
+      background: var(--t-dusty);
+      color: var(--t-dusty-fg);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+    .download-note strong { font-weight: 600; }
+
+    /* ── Voice ── */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .voice-card {
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      border: 1px solid rgba(19,31,134,0.1);
+      background: var(--card);
+    }
+    .voice-card h4 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .voice-card ul { list-style: none; display: grid; gap: 0.375rem; }
+    .voice-card li { font-size: 0.875rem; padding-left: 1rem; position: relative; }
+    .voice-card li::before { content: '—'; position: absolute; left: 0; opacity: 0.4; }
+    .voice-card.yes h4 { color: #223440; }
+    .voice-card.no  h4 { color: #7a2020; }
+
+    @media (max-width: 36rem) {
+      .voice-grid { grid-template-columns: 1fr; }
+      .kit-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── Gate ── */
+    #bk-gate {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #131F86;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    #bk-gate img { height: 2rem; filter: brightness(0) invert(1); }
+    #bk-gate form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 20rem;
+    }
+    #bk-gate label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(243,241,232,0.6);
+    }
+    #bk-gate input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(243,241,232,0.2);
+      background: rgba(243,241,232,0.08);
+      color: #F3F1E8;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      text-align: center;
+      letter-spacing: 0.1em;
+      outline: none;
+    }
+    #bk-gate input:focus { border-color: rgba(243,241,232,0.5); }
+    #bk-gate button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 9999px;
+      border: none;
+      background: #F3F1E8;
+      color: #131F86;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    #bk-gate button:hover { opacity: 0.88; }
+    #bk-error {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8125rem;
+      color: #DFC28C;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="bk-gate">
+  <img src="/brand/civic-logo-w-text-horizontal.svg" alt="Civic-Chain" />
+  <form onsubmit="checkPassword(event)">
+    <label for="bk-pass">Brand Kit Access</label>
+    <input id="bk-pass" type="password" placeholder="Enter password" autofocus autocomplete="current-password" />
+    <button type="submit">Unlock</button>
+    <span id="bk-error">Incorrect password</span>
+  </form>
+</div>
+
+<div id="bk-content">
+<div class="page">
+
+  <!-- Header -->
+  <header class="kit-header">
+    <img src="/brand/civic-logo-w-text-horizontal.svg" alt="Civic-Chain wordmark" />
+    <div class="kit-meta">Brand Kit &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; 2026</div>
+  </header>
+
+  <!-- Positioning -->
+  <section class="section">
+    <div class="section-label">Brand Positioning</div>
+    <div class="position-block">
+      <div class="position-headline">Every dollar<br>on the record.</div>
+      <p class="position-body">A procurement platform where money moves fast, and everyone can watch. Built for towns, cities, counties, school districts, HOAs, and any body that manages shared contractor spend.</p>
+    </div>
+  </section>
+
+  <!-- Primary Colors -->
+  <section class="section">
+    <div class="section-label">Primary Colors</div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#131F86;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Civic Blue</span>
+          <span class="swatch-hex">#131F86</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#F3F1E8; border-bottom:1px solid rgba(19,31,134,0.08);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Warm Cream</span>
+          <span class="swatch-hex">#F3F1E8</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#FBF8F0; border-bottom:1px solid rgba(19,31,134,0.08);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Card</span>
+          <span class="swatch-hex">#FBF8F0</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#EFE9DF; border-bottom:1px solid rgba(19,31,134,0.08);"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Surface</span>
+          <span class="swatch-hex">#EFE9DF</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#5C6382;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Muted</span>
+          <span class="swatch-hex">#5C6382</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tonal Palette -->
+  <section class="section">
+    <div class="section-label">Tonal Palette</div>
+    <div class="swatch-grid-tone">
+      <div class="tone-swatch" style="background:#FBF8F0; color:#131F86; border:1px solid rgba(19,31,134,0.1);">
+        <span class="tone-name">Cream</span>
+        <span class="tone-bg-hex">BG #FBF8F0</span>
+        <span class="tone-fg-hex">FG #131F86</span>
+      </div>
+      <div class="tone-swatch" style="background:#DBE3EE; color:#1C2F74;">
+        <span class="tone-name">Dusty</span>
+        <span class="tone-bg-hex">BG #DBE3EE</span>
+        <span class="tone-fg-hex">FG #1C2F74</span>
+      </div>
+      <div class="tone-swatch" style="background:#DFC28C; color:#352613;">
+        <span class="tone-name">Gold</span>
+        <span class="tone-bg-hex">BG #DFC28C</span>
+        <span class="tone-fg-hex">FG #352613</span>
+      </div>
+      <div class="tone-swatch" style="background:#D5DFD5; color:#223440;">
+        <span class="tone-name">Sage</span>
+        <span class="tone-bg-hex">BG #D5DFD5</span>
+        <span class="tone-fg-hex">FG #223440</span>
+      </div>
+      <div class="tone-swatch" style="background:#626C89; color:#F7F4ED;">
+        <span class="tone-name">Slate</span>
+        <span class="tone-bg-hex">BG #626C89</span>
+        <span class="tone-fg-hex">FG #F7F4ED</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography -->
+  <section class="section">
+    <div class="section-label">Typography</div>
+
+    <div class="type-row">
+      <div class="type-specimen type-display-specimen">DM Serif Text</div>
+      <div class="type-meta">Display / Headlines &nbsp;·&nbsp; DM Serif Text &nbsp;·&nbsp; Google Fonts</div>
+    </div>
+    <div class="type-row">
+      <div class="type-specimen type-heading-specimen">Every dollar on the record.</div>
+      <div class="type-meta">Heading &nbsp;·&nbsp; DM Serif Text Regular &nbsp;·&nbsp; tracking -0.03em</div>
+    </div>
+    <div class="type-row">
+      <div class="type-specimen type-body-specimen">A procurement platform where money moves fast, and everyone can watch. Most municipalities manage real contractor spend through inboxes, PDFs, calls, and memory.</div>
+      <div class="type-meta">Body &nbsp;·&nbsp; DM Sans Regular &nbsp;·&nbsp; 16px / 28px leading</div>
+    </div>
+    <div class="type-row">
+      <div class="type-specimen type-label-specimen">Why It Matters</div>
+      <div class="type-meta">Label / Eyebrow &nbsp;·&nbsp; DM Sans SemiBold &nbsp;·&nbsp; tracking 0.18em &nbsp;·&nbsp; uppercase</div>
+    </div>
+  </section>
+
+  <!-- Logos -->
+  <section class="section">
+    <div class="section-label">Logo Variations</div>
+    <div class="logo-grid">
+      <div class="logo-card on-light">
+        <img src="/brand/civic-logo-w-text-horizontal.svg" alt="Civic-Chain wordmark on light" />
+        <span class="logo-card-label">Wordmark — Light BG</span>
+      </div>
+      <div class="logo-card on-dark">
+        <img src="/brand/civic-logo-w-text-horizontal.svg" alt="Civic-Chain wordmark on dark" style="filter:brightness(0) invert(1);" />
+        <span class="logo-card-label">Wordmark — Dark BG</span>
+      </div>
+      <div class="logo-card on-cream">
+        <img src="/brand/civic-chain-logo.svg" alt="Civic-Chain icon" class="icon" />
+        <span class="logo-card-label">Icon mark</span>
+      </div>
+      <div class="logo-card on-light">
+        <img src="/brand/civic-logo-hero.svg" alt="Civic-Chain hero logo" class="icon" />
+        <span class="logo-card-label">Hero variant</span>
+      </div>
+    </div>
+    <div class="download-note">
+      <strong>Logo files:</strong> SVG originals are in <code>/public/brand/</code> in the project repository. Use SVG for all digital placements. Do not rasterize below 200px.
+    </div>
+  </section>
+
+  <!-- Brand Voice -->
+  <section class="section">
+    <div class="section-label">Brand Voice</div>
+    <div class="voice-grid">
+      <div class="voice-card yes">
+        <h4>Sound like</h4>
+        <ul>
+          <li>Direct and specific — name the problem plainly</li>
+          <li>Calm authority — confident without hype</li>
+          <li>Civic, not corporate — plain English, no jargon</li>
+          <li>Evidence-first — cite figures, let them land</li>
+          <li>Short sentences — one idea per line</li>
+        </ul>
+      </div>
+      <div class="voice-card no">
+        <h4>Avoid</h4>
+        <ul>
+          <li>Blockchain-first language ("on-chain," "web3")</li>
+          <li>Government bureaucrat tone ("leverage synergies")</li>
+          <li>Startup hype ("disrupting," "revolutionizing")</li>
+          <li>Passive voice and hedged claims</li>
+          <li>Em dashes — use commas or periods instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Phrases -->
+  <section class="section">
+    <div class="section-label">Key Phrases &amp; Taglines</div>
+    <div style="display:grid; gap:0.75rem;">
+      <div class="logo-card on-light" style="align-items:flex-start; padding:1.25rem 1.5rem;">
+        <div style="font-family:'DM Serif Text',serif; font-size:1.25rem; letter-spacing:-0.02em;">"Every dollar on the record."</div>
+        <div class="type-meta">Primary tagline</div>
+      </div>
+      <div class="logo-card on-light" style="align-items:flex-start; padding:1.25rem 1.5rem;">
+        <div style="font-size:0.9375rem;">"A procurement platform where money moves fast, and everyone can watch."</div>
+        <div class="type-meta">Hero body / subhead</div>
+      </div>
+      <div class="logo-card on-light" style="align-items:flex-start; padding:1.25rem 1.5rem;">
+        <div style="font-size:0.9375rem;">"Vendor payments settle in 4 seconds on XRPL — not 1 to 3 business days on ACH."</div>
+        <div class="type-meta">Payment rail differentiator</div>
+      </div>
+      <div class="logo-card on-light" style="align-items:flex-start; padding:1.25rem 1.5rem;">
+        <div style="font-size:0.9375rem;">"Built for towns. Scales to cities, counties, school districts, and any body that manages shared spend."</div>
+        <div class="type-meta">Market scope statement</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section">
+    <div class="section-label">Contact</div>
+    <div class="position-block" style="background:var(--t-dusty); color:var(--t-dusty-fg);">
+      <p style="font-size:0.875rem; margin-bottom:0.5rem;">For brand questions, asset requests, or partnership inquiries:</p>
+      <a href="mailto:info@civic-chain.com" style="font-size:1.125rem; font-weight:600; color:var(--t-dusty-fg);">info@civic-chain.com</a>
+    </div>
+  </section>
+
+</div>
+</div><!-- /bk-content -->
+
+<script>
+  function checkPassword(e) {
+    e.preventDefault();
+    var val = document.getElementById('bk-pass').value;
+    if (val === '6942069') {
+      sessionStorage.setItem('bk_auth', '1');
+      document.getElementById('bk-gate').style.display = 'none';
+      document.getElementById('bk-content').style.display = 'block';
+    } else {
+      document.getElementById('bk-error').style.display = 'block';
+      document.getElementById('bk-pass').value = '';
+      document.getElementById('bk-pass').focus();
+    }
+  }
+
+  if (sessionStorage.getItem('bk_auth') === '1') {
+    document.getElementById('bk-content').style.display = 'block';
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /demo
+Disallow: /landing-02
+Disallow: /pitch
+Disallow: /sandbox
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+Sitemap: https://civic-chain.com/sitemap.xml

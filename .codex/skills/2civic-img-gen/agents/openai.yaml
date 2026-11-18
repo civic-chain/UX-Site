@@ -1,0 +1,7 @@
+interface:
+  display_name: "2Civic Image Gen"
+  short_description: "2Civic image workflow router"
+  default_prompt: "Use $2civic-img-gen for this CivicChain image generation task."
+
+policy:
+  allow_implicit_invocation: true

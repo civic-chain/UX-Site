@@ -1,0 +1,7 @@
+interface:
+  display_name: "Illustration Extraction"
+  short_description: "Extract complete transparent landing art"
+  default_prompt: "Use $illustration-extraction with the full section generated.png path, the illustration the image model should isolate, and the destination path; use imagegen to create a new complete high-quality subject on mandatory green chroma-key, then post-process only that generated draft into transparent PNG plus WebP. Do not use reference.png; Python only removes chroma-key after imagegen."
+
+policy:
+  allow_implicit_invocation: true

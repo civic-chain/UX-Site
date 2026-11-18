@@ -1,0 +1,4 @@
+:HL["/_next/static/chunks/0v2sebksk85mf.css","style"]
+:HL["/_next/static/media/19155629e56b2aed-s.p.0nd7zy~bmd2ve.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/5c285b27cdda1fe8-s.p.0yo6-5yoeeudq.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"resources","param":null,"prefetchHints":0,"slots":{"children":{"name":"municipal-payment-delays","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"tNdYZsuY-UMHw34EQgnP5"}

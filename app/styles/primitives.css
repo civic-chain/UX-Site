@@ -1,0 +1,348 @@
+/* ─────────────────────────────────────────────────────────────
+   CivicChain Design System — Primitives
+   Base reset · semantic typography · max-width helpers · body chrome ·
+   motion hooks. Sizing, spacing, radius, and shadows use Tailwind
+   utilities and theme variables directly.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Base reset + document chrome ─────────────────────────── */
+
+* {
+  border-color: var(--border);
+}
+
+h1, h2, h3, h4, h5, h6, p, blockquote, a, button, li, label, span {
+  text-wrap: balance;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: var(--viewport-min-height);
+  background:
+    radial-gradient(ellipse 50% 12% at 60% 0%, color-mix(in oklab, var(--gold-300), transparent 82%), transparent),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  transition:
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+
+a,
+button {
+  transition:
+    color var(--dur-fast) var(--ease-soft),
+    background-color var(--dur-fast) var(--ease-soft),
+    border-color var(--dur-fast) var(--ease-soft),
+    transform var(--dur-fast) var(--ease-soft),
+    translate var(--dur-fast) var(--ease-soft),
+    scale var(--dur-fast) var(--ease-soft),
+    box-shadow var(--dur-fast) var(--ease-soft);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--blue-900), white 72%);
+  color: var(--foreground);
+}
+
+/* ── Layout rhythm ────────────────────────────────────────── */
+
+.section-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.max-page {
+  max-width: var(--page-max);
+}
+
+.max-bento {
+  max-width: var(--bento-max);
+}
+
+/* ── Landing hero frame + grid overlay ────────────────────── */
+
+.landing-hero-frame {
+  min-height: var(--landing-hero-min-height);
+}
+
+@media (width >= 64rem) {
+  .landing-hero-frame {
+    min-height: calc(var(--landing-hero-viewport-height) - calc(var(--spacing) * 16));
+  }
+}
+
+.landing-grid-overlay {
+  background-image:
+    linear-gradient(to right, var(--landing-grid-line) var(--border-width-1), transparent var(--border-width-1)),
+    linear-gradient(to bottom, var(--landing-grid-line) var(--border-width-1), transparent var(--border-width-1));
+  background-size: var(--landing-grid-size) var(--landing-grid-size);
+  opacity: var(--landing-grid-opacity);
+}
+
+/* ── Typography utilities ─────────────────────────────────────
+   Semantic text roles backed by Tailwind's official size scale. ── */
+
+@utility captions {
+  font: 500 var(--text-xs) / var(--text-xs--line-height) var(--font-sans), sans-serif;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+@utility body-xs {
+  font: 400 var(--text-xs) / var(--text-xs--line-height) var(--font-sans), sans-serif;
+}
+
+@utility body-sm {
+  font: 400 var(--text-sm) / var(--text-sm--line-height) var(--font-sans), sans-serif;
+}
+
+@utility body {
+  font: 400 var(--text-base) / var(--text-base--line-height) var(--font-sans), sans-serif;
+}
+
+@utility body-bold {
+  font: 700 var(--text-base) / var(--text-base--line-height) var(--font-sans), sans-serif;
+}
+
+@utility body-lg {
+  font: 400 var(--text-lg) / var(--text-lg--line-height) var(--font-sans), sans-serif;
+}
+
+@utility body-xl {
+  font: 400 var(--text-xl) / var(--text-xl--line-height) var(--font-sans), sans-serif;
+}
+
+@utility h4 {
+  font: 400 var(--text-3xl) / var(--text-3xl--line-height) var(--font-display), serif;
+}
+
+@utility h3 {
+  font: 400 var(--text-5xl) / var(--text-5xl--line-height) var(--font-display), serif;
+}
+
+@utility h2 {
+  font: 400 var(--text-6xl) / var(--text-6xl--line-height) var(--font-display), serif;
+}
+
+@utility h1 {
+  font: 400 var(--text-8xl) / var(--text-8xl--line-height) var(--font-display), serif;
+}
+
+@layer base {
+  :where(.body-xs, .body-sm, .body, .body-bold, .body-lg, .body-xl, .h4, .h3, .h2, .h1) {
+    color: var(--foreground);
+  }
+
+  :where(.captions) {
+    color: var(--slate-500);
+  }
+}
+
+.tracking-metric {
+  letter-spacing: var(--tracking-metric);
+}
+
+.tracking-label {
+  letter-spacing: var(--tracking-label);
+}
+
+.tracking-label-compact {
+  letter-spacing: var(--tracking-label-compact);
+}
+
+/* Hide the scrollbar chrome while keeping scroll (e.g. the demo console nav). */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Icon glyph (Material Symbols Rounded) ────────────────────
+   One outline glyph font (FILL 0). The size utility owns font-size +
+   optical size + the tier's default weight; icon-weight-* overrides
+   only the stroke for quiet/loud contexts. Private --_icon-* vars
+   compose into one font-variation-settings — their selectors are
+   allowlisted in lib/design-policy.ts. */
+
+.material-symbols-rounded {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-box-size);
+  height: var(--icon-box-size);
+  font-family: var(--font-material-symbols), sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: var(--icon-size-md);
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  font-variation-settings: "FILL" 0, "wght" var(--icon-axis-wght), "GRAD" 0, "opsz" var(--icon-axis-opsz);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  --icon-axis-wght: var(--icon-weight-md);
+  --icon-axis-opsz: var(--icon-opsz-md);
+}
+
+.icon-sz-xs {
+  font-size: var(--icon-size-xs);
+  --icon-axis-wght: var(--icon-weight-xs);
+  --icon-axis-opsz: var(--icon-opsz-xs);
+}
+
+.icon-sz-sm {
+  font-size: var(--icon-size-sm);
+  --icon-axis-wght: var(--icon-weight-sm);
+  --icon-axis-opsz: var(--icon-opsz-sm);
+}
+
+.icon-sz-md {
+  font-size: var(--icon-size-md);
+  --icon-axis-wght: var(--icon-weight-md);
+  --icon-axis-opsz: var(--icon-opsz-md);
+}
+
+.icon-sz-lg {
+  font-size: var(--icon-size-lg);
+  --icon-axis-wght: var(--icon-weight-lg);
+  --icon-axis-opsz: var(--icon-opsz-lg);
+}
+
+.icon-sz-xl {
+  font-size: var(--icon-size-xl);
+  --icon-axis-wght: var(--icon-weight-xl);
+  --icon-axis-opsz: var(--icon-opsz-xl);
+}
+
+.icon-weight-light {
+  --icon-axis-wght: var(--icon-weight-light);
+}
+
+.icon-weight-bold {
+  --icon-axis-wght: var(--icon-weight-bold);
+}
+
+/* ── Expandable mechanism ─────────────────────────────────────
+   Shared click-to-reveal animation for workflow cards and FAQ.
+   React owns state, keyboard, ARIA, and single-open groups. */
+
+[data-expandable] {
+  cursor: pointer;
+  transition:
+    transform var(--dur-med) var(--ease-soft),
+    box-shadow var(--dur-med) ease;
+}
+
+[data-expandable]:hover {
+  transform: translateY(var(--lift-hover-offset));
+  box-shadow: var(--shadow-xl), var(--shadow-inner);
+}
+
+[data-expandable]:focus-visible {
+  outline: var(--border-width-2) solid var(--ring);
+  outline-offset: var(--focus-outline-offset);
+}
+
+[data-expandable][data-open="true"] {
+  box-shadow: var(--shadow-xl), var(--shadow-inner);
+}
+
+.expandable-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows var(--dur-slow) var(--ease-soft),
+    margin-top var(--dur-slow) var(--ease-soft);
+  margin-top: 0;
+}
+
+.expandable-body > .inner {
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(var(--expandable-enter-offset));
+  transition:
+    opacity var(--dur-med) ease var(--dur-delay-sm),
+    transform var(--dur-slow) var(--ease-soft) var(--dur-delay-sm);
+}
+
+[data-expandable][data-open="true"] .expandable-body {
+  grid-template-rows: 1fr;
+  margin-top: calc(var(--spacing) * 4);
+}
+
+[data-expandable][data-open="true"] .expandable-body > .inner {
+  opacity: 1;
+  transform: none;
+}
+
+.expandable-toggle {
+  flex: none;
+  width: var(--expandable-toggle-size);
+  height: var(--expandable-toggle-size);
+  border-radius: var(--radius-2xl);
+  border: var(--border-width-1) solid color-mix(in oklab, currentcolor, transparent 85%);
+  background: color-mix(in oklab, currentcolor, white 90%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: color-mix(in oklab, currentcolor, transparent 35%);
+  transition:
+    transform var(--dur-med) var(--ease-soft),
+    background var(--dur-med) ease,
+    color var(--dur-med) ease;
+}
+
+.expandable-toggle svg {
+  width: 50%;
+  height: 50%;
+  stroke: currentcolor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+[data-expandable][data-open="true"] .expandable-toggle {
+  transform: rotate(var(--expandable-toggle-rotation));
+  background: currentcolor;
+  color: var(--cream-50);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a,
+  button,
+  [data-expandable],
+  .expandable-body,
+  .expandable-body > .inner,
+  .expandable-toggle {
+    transition: none;
+  }
+}
+
+/* ── Motion kill switch ───────────────────────────────────────
+   Used by focused visual capture scripts and protected static sections. */
+
+main > section[data-disable-motion="true"] {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+main > section[data-disable-motion="true"],
+main > section[data-disable-motion="true"] *,
+main > section[data-disable-motion="true"] *::before,
+main > section[data-disable-motion="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+}

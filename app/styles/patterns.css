@@ -1,0 +1,268 @@
+/* ─────────────────────────────────────────────────────────────
+   CivicChain Design System — Patterns
+   Composites that carry meaning across one or more primitives.
+   A pattern owns layout only (grid, position, z-index, margins
+   specific to its composition). It NEVER redefines a primitive's
+   geometry — if it needs a different icon-chip size, it picks a
+   modifier or sets a custom property.
+   ───────────────────────────────────────────────────────────── */
+
+.section-shell {
+  padding-inline: calc(var(--spacing) * 6);
+}
+
+@media (width >= 40rem) {
+  .section-shell {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+}
+
+@media (width >= 64rem) {
+  .section-shell {
+    padding-inline: calc(var(--spacing) * 16);
+  }
+}
+
+@media (width >= 80rem) {
+  .section-shell {
+    padding-inline: calc(var(--spacing) * 24);
+  }
+}
+
+.faq-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--spacing) * 4);
+}
+
+[data-expandable][data-open="true"] .faq-toggle {
+  border-color: color-mix(in oklab, var(--gold-600), transparent 45%);
+  background: var(--gold-600);
+  color: var(--cream-50);
+}
+
+.button-border-current {
+  border-color: currentcolor;
+}
+
+.button-border-transparent {
+  border-color: transparent;
+}
+
+/* ── Control color contract ───────────────────────────────────
+   A surface or an explicit tone override sets the control variables;
+   interactive controls read them — one tone source instead of a per-component
+   matrix. Button and Tabs consume the contract; Badge and IconChip keep their
+   own semantic palette and stay surface-aware via their `inherit` default.
+   SurfaceCard dark tones derive a light filled CTA so primary actions separate
+   from the dark card while explicit Button tone overrides keep their own fill. */
+.ctl-tone-cream {
+  --ctl-accent: var(--blue-900);
+  --ctl-on-accent: var(--cream-50);
+  --ctl-ink: var(--blue-900);
+  --ctl-soft: var(--cream-200);
+  --ctl-filled-accent: var(--ctl-accent);
+  --ctl-on-filled-accent: var(--ctl-on-accent);
+}
+
+.ctl-tone-sky {
+  --ctl-accent: var(--blue-700);
+  --ctl-on-accent: var(--cream-50);
+  --ctl-ink: var(--blue-700);
+  --ctl-soft: var(--blue-200);
+  --ctl-filled-accent: var(--ctl-accent);
+  --ctl-on-filled-accent: var(--ctl-on-accent);
+}
+
+.ctl-tone-gold {
+  --ctl-accent: var(--gold-800);
+  --ctl-on-accent: var(--cream-50);
+  --ctl-ink: var(--gold-800);
+  --ctl-soft: var(--gold-200);
+  --ctl-filled-accent: var(--ctl-accent);
+  --ctl-on-filled-accent: var(--ctl-on-accent);
+}
+
+.ctl-tone-sage {
+  --ctl-accent: var(--green-900);
+  --ctl-on-accent: var(--cream-50);
+  --ctl-ink: var(--green-900);
+  --ctl-soft: var(--green-200);
+  --ctl-filled-accent: var(--ctl-accent);
+  --ctl-on-filled-accent: var(--ctl-on-accent);
+}
+
+/* slate is a mid-dark surface (text-cream-50), so its quiet controls stay light. */
+.ctl-tone-slate {
+  --ctl-accent: var(--slate-700);
+  --ctl-on-accent: var(--cream-50);
+  --ctl-ink: var(--cream-50);
+  --ctl-soft: var(--slate-200);
+  --ctl-filled-accent: var(--ctl-accent);
+  --ctl-on-filled-accent: var(--ctl-on-accent);
+}
+
+.ctl-tone-ink {
+  --ctl-accent: var(--blue-900);
+  --ctl-on-accent: var(--cream-50);
+  --ctl-ink: var(--cream-50);
+  --ctl-soft: var(--blue-200);
+  --ctl-filled-accent: var(--ctl-accent);
+  --ctl-on-filled-accent: var(--ctl-on-accent);
+}
+
+.surface-card.ctl-tone-slate,
+.surface-card.ctl-tone-ink {
+  --ctl-filled-accent: var(--cream-50);
+  --ctl-on-filled-accent: var(--blue-900);
+}
+
+/* Filled (default) Button — color from the contract; geometry/motion in cva.
+   Hover is a color-mix darken, so every tone gets live feedback (no dependence
+   on a darker ramp step existing). */
+.btn-filled {
+  background: var(--ctl-filled-accent);
+  color: var(--ctl-on-filled-accent);
+}
+
+.btn-filled:hover {
+  background: color-mix(in oklab, var(--ctl-filled-accent), black 12%);
+}
+
+.btn-filled:active {
+  background: var(--ctl-filled-accent);
+}
+
+/* Secondary — light in-family surface, saturated family text. Text reads
+   --ctl-accent (not --ctl-ink) so it stays dark on the light fill even on dark
+   surfaces, where --ctl-ink flips light. */
+.btn-soft {
+  background: var(--ctl-soft);
+  color: var(--ctl-accent);
+}
+
+.btn-soft:hover {
+  background: color-mix(in oklab, var(--ctl-soft), black 7%);
+}
+
+.btn-soft:active {
+  background: color-mix(in oklab, var(--ctl-soft), black 10%);
+}
+
+/* Outline — quiet light fill, saturated family stroke + label. */
+.btn-outline {
+  background: var(--cream-50);
+  color: var(--ctl-accent);
+  border-color: color-mix(in oklab, var(--ctl-accent), transparent 70%);
+}
+
+.btn-outline:hover {
+  background: var(--ctl-soft);
+  border-color: var(--ctl-accent);
+}
+
+.btn-outline:active {
+  background: color-mix(in oklab, var(--ctl-soft), black 6%);
+}
+
+/* Ghost — no resting fill; family text sits directly on the surface, so it
+   reads --ctl-ink (light on dark surfaces). Muted at rest, full on hover. */
+.btn-ghost {
+  color: color-mix(in oklab, var(--ctl-ink), transparent 30%);
+}
+
+.btn-ghost:hover {
+  color: var(--ctl-ink);
+  background: color-mix(in oklab, var(--ctl-ink), transparent 90%);
+}
+
+.btn-ghost:active {
+  background: color-mix(in oklab, var(--ctl-ink), transparent 84%);
+}
+
+/* Underline / text button — label + rule both ride --ctl-ink. */
+.btn-quiet {
+  color: var(--ctl-ink);
+}
+
+.btn-quiet-dim {
+  color: color-mix(in oklab, var(--ctl-ink), transparent 45%);
+}
+
+.btn-quiet-dim:hover {
+  color: var(--ctl-ink);
+}
+
+.landing-section-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--landing-section-gap);
+}
+
+/* Roomier marketing rhythm for the active converging landing page. */
+.landing-section-flow-roomy {
+  gap: calc(var(--section-gap) * 0.9);
+}
+
+.surface-material {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.surface-material::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background-position: center;
+  background-size: cover;
+  content: "";
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.surface-material > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Text inside a tinted card inherits the card's tone color — but NOT controls.
+   A Button/Tabs trigger keeps its own --ctl-* contract color (e.g. a filled
+   button's on-accent text must stay readable on its accent fill, not inherit the
+   card's dark ink). Without the btn- exclusion, `.surface-card :where(.body-sm)`
+   (specificity 0,2,0) beats `.btn-filled` (0,1,0) and the label goes invisible. */
+.surface-card :where(.body-xs, .body-sm, .body, .body-bold, .body-lg, .body-xl, .h4, .h3, .h2, .h1, .captions):not([class*="text-"], [class*="btn-"]) {
+  color: inherit;
+}
+
+.surface-material-old-paper::before {
+  background-image: url("/design-assets/bg-textures/texture-old-paper-fine.webp");
+  opacity: 0.78;
+}
+
+.surface-material-banknote::before {
+  background-image: url("/design-assets/bg-textures/texture-banknote-coarse.webp");
+  opacity: 0.34;
+}
+
+.surface-material-blueprint::before {
+  background-image: url("/design-assets/bg-textures/texture-blueprint-coarse.webp");
+  opacity: 0.3;
+}
+
+.surface-material-notebook::before {
+  background-image: url("/design-assets/bg-textures/texture-notebook-fine.webp");
+  opacity: 0.42;
+}
+
+.problem-card-art {
+  height: var(--problem-card-art-height);
+}
+
+@media (width >= 64rem) {
+  .problem-card-art {
+    height: var(--problem-card-art-height-lg);
+  }
+}

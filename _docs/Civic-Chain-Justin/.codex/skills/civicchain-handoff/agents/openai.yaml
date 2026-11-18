@@ -1,0 +1,6 @@
+interface:
+  display_name: "Civicchain Handoff"
+  short_description: "Repo-specific code structure and handoff rules"
+  default_prompt: "Use $civicchain-handoff before structural JS/TS edits in this repo to enforce colocation, typed public boundaries, sparse why-comments, predictable folder shape, and clean handoff."
+policy:
+  allow_implicit_invocation: true

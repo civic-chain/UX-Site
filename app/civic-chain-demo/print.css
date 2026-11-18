@@ -1,0 +1,43 @@
+/* ── Print rules for the demo console only ────────────────────
+   Imported by `app/civic-chain-demo/page.tsx`, so Next.js loads it for this
+   route segment and nowhere else. These rules previously sat in the global
+   `app/styles/patterns.css`, where `@page { size: landscape }` applied to every
+   route in the app, including the landing page and the blog articles.
+
+   The console prints budget packets (Select Board Packet, Board View, Auditor)
+   straight from the browser. On screen, TableCard scrolls wide tables inside
+   `.overflow-x-auto`; on paper that horizontal scroll is clipped and the
+   right-hand columns (Encumbered, Remaining, Utilized, Status) silently drop
+   off the sheet. For print we switch to landscape, then drop the intrinsic
+   min-width so columns compress to the page width and shrink the type a touch:
+   shrink-to-fit instead of clip-and-lose-data. */
+@media print {
+  @page {
+    size: landscape;
+    margin: 12mm;
+  }
+
+  .overflow-x-auto {
+    overflow: visible !important;
+  }
+
+  .overflow-x-auto table {
+    min-width: 0 !important;
+    width: 100% !important;
+    font-size: 9.5px !important;
+  }
+
+  .overflow-x-auto table :is(th, td) {
+    padding: 0.25rem 0.4rem !important;
+  }
+}
+
+/* Controls are for the screen. A printed packet or records response carries
+   the document, not the buttons that produced it: Print, Export, Generate, the
+   sort and filter selects. Clickable table rows and cards are not <button>
+   elements, so their content still prints. */
+@media print {
+  main button {
+    display: none !important;
+  }
+}

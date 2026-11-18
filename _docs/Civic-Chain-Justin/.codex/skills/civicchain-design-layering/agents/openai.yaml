@@ -1,0 +1,6 @@
+interface:
+  display_name: "Civicchain Design Layering"
+  short_description: "Repo-specific token, primitive, pattern, and design-policy rules"
+  default_prompt: "Use $civicchain-design-layering when editing the style system or design-policy in this repo so visual changes stay token-first, fail-closed, and layered correctly."
+policy:
+  allow_implicit_invocation: true

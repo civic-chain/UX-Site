@@ -1,0 +1,24 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "alpha-value-notation": null,
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["source", "theme", "utility"]
+      }
+    ],
+    "color-function-alias-notation": null,
+    "color-function-notation": null,
+    "custom-property-empty-line-before": null,
+    "custom-property-pattern": "^_?[a-z0-9]+(?:-[a-z0-9]+)*(?:--[a-z0-9]+(?:-[a-z0-9]+)*)?$",
+    "function-no-unknown": [
+      true,
+      {
+        "ignoreFunctions": ["view"]
+      }
+    ],
+    "import-notation": null,
+    "rule-empty-line-before": null
+  }
+}

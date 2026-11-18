@@ -1,0 +1,25 @@
+.flip-wrap {
+  perspective: 1100px;
+}
+
+.flip-inner {
+  display: grid;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 680ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flip-inner-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  grid-area: 1 / 1;
+  min-width: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.flip-face-back {
+  transform: rotateY(180deg);
+}

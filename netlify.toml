@@ -1,0 +1,27 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NODE_VERSION = "20"
+
+[build.cache]
+  paths = [".next/cache"]
+
+# /how-it-works is the canonical live page. /how is an unlinked legacy
+# duplicate covering the same intent; 301 it so the two don't split search
+# signals. force = true because the static export still emits a /how file.
+[[redirects]]
+  from = "/how"
+  to = "/how-it-works"
+  status = 301
+  force = true
+
+# /landing-v2 is the old preview URL. It only redirects client-side, so it
+# still ships as an indexable homepage duplicate; make it a real 301.
+[[redirects]]
+  from = "/landing-v2"
+  to = "/"
+  status = 301
+  force = true

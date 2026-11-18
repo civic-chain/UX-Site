@@ -1,0 +1,175 @@
+/* ─────────────────────────────────────────────────────────────
+   CivicChain Design System — Tokens
+   Flat gallery: six color ramps, structural defaults, and runtime
+   variables that do not need Tailwind utility classes. Color tints
+   are ramp steps with opacity at the use site; component variants
+   are the editing surface.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Color ramps — the whole palette, just colors ──
+     Six hue families sampled from the brand boards, lightness 50
+     (lightest) → 900 (darkest). A tint is <ramp>/<opacity> at the
+     use site, never its own token.
+     AA holds: ink (blue-900) on any cream/tone surface stays >= 4.5. */
+  --blue-100: #e2e9f7;
+  --blue-200: #d6e0f4;
+  --blue-300: #b4c0e0;
+  --blue-500: #90a2d0;
+  --blue-700: #1c2f74;
+  --blue-900: #131f86;
+  --gold-100: #efdfc3;
+  --gold-200: #eddab9;
+  --gold-300: #e9d3ab;
+  --gold-500: #b9a175;
+  --gold-600: #8a775a;
+  --gold-800: #352613;
+  --green-100: #d6f0db;
+  --green-200: #c6e8cd;
+  --green-300: #aed7b6;
+  --green-500: #86b18f;
+  --green-600: #498458;
+  --green-900: #0b401f;
+  --cream-50: #faf3e8;
+  --cream-100: #f3f1e8;
+  --cream-200: #efe9df;
+  --cream-300: #e4ddd2;
+  --slate-100: #ebe5ed;
+  --slate-200: #e3dbe5;
+  --slate-300: #c8bccb;
+  --slate-400: #9f91a3;
+  --slate-500: #6d5a72;
+  --slate-700: #48354d;
+  --red-100: #f8e1e5;
+  --red-400: #bf8084;
+  --red-600: #882335;
+
+  /* ── Structural defaults only ── */
+  --background: var(--cream-100);
+  --foreground: var(--blue-900);
+  --border: rgba(19, 31, 134, 0.14);
+  --ring: rgba(19, 31, 134, 0.24);
+
+  /* Control color contract — surfaces (and explicit tone overrides) fill these;
+     controls read them. A contextual default like --foreground, not a per-ramp
+     semantic alias. */
+  --ctl-accent: var(--blue-900);
+  --ctl-on-accent: var(--cream-50);
+  --ctl-ink: var(--foreground);
+  --ctl-soft: var(--blue-200);
+  --ctl-filled-accent: var(--ctl-accent);
+  --ctl-on-filled-accent: var(--ctl-on-accent);
+
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+
+  /* ── Typography — two families, assigned by semantic text utilities ── */
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-dm-serif-text);
+
+  --tracking-metric: 0em;
+  --tracking-label: 0.18em;
+  --tracking-label-compact: 0.155em;
+
+  /* ── Icon sizing (Material Symbols Rounded) ──
+     Glyph tiers consumed by the Icon size prop. Optical size (opsz)
+     tracks the rendered px and small glyphs read a touch heavier, so
+     the outline stays optically even across sizes (Material Symbols
+     guidance). Quiet vs loud contexts override the stroke with the
+     icon-weight-light / icon-weight-bold utilities. */
+  --icon-size-xs: 1rem;
+  --icon-size-sm: 1.25rem;
+  --icon-size-md: 1.5rem;
+  --icon-size-lg: 2rem;
+  --icon-size-xl: 2.5rem;
+  --icon-box-size: 1em;
+
+  --icon-weight-xs: 500;
+  --icon-weight-sm: 450;
+  --icon-weight-md: 400;
+  --icon-weight-lg: 350;
+  --icon-weight-xl: 320;
+  --icon-weight-light: 300;
+  --icon-weight-bold: 600;
+
+  --icon-opsz-xs: 20;
+  --icon-opsz-sm: 20;
+  --icon-opsz-md: 24;
+  --icon-opsz-lg: 32;
+  --icon-opsz-xl: 40;
+
+  /* ── Layout rhythm (balanced canon) ── */
+  --section-gap: clamp(3.5rem, 7vw, 6.25rem);
+  --landing-section-gap: calc(var(--section-gap) * 0.68);
+  --page-max: 77.5rem;
+  --bento-max: 70rem;
+  --viewport-min-height: 100dvh;
+  --landing-hero-min-height: 32rem;
+  --landing-hero-viewport-height: 44rem;
+  --landing-grid-size: 1.125rem;
+  --landing-grid-line: rgba(19, 31, 134, 0.02);
+  --landing-grid-opacity: 1;
+  --problem-card-art-height: 13rem;
+  --problem-card-art-height-lg: 12.5rem;
+
+  --expandable-toggle-size: 2.25rem;
+
+  /* ── Motion canon ── */
+  --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 180ms;
+  --dur-med: 320ms;
+  --dur-slow: 420ms;
+  --dur-delay-sm: 60ms;
+  --lift-hover-offset: -2px;
+  --focus-outline-offset: 3px;
+  --expandable-enter-offset: 6px;
+  --expandable-toggle-rotation: 45deg;
+
+  /* ── Workspace interface tokens ──────────────────────────────
+     Admin console, vendor portal, wizard, and citizen ledger.
+     Defined at :root so Radix portals (tooltips, dialogs, dropdowns)
+     can resolve them — portals render outside the workspace DOM tree. */
+
+  /* Core surfaces */
+  --workspace-panel:          var(--cream-50);
+  --workspace-surface:        var(--cream-100);
+  --workspace-surface-strong: var(--cream-200);
+  --workspace-muted:          rgba(19, 31, 134, 0.05);
+  --workspace-border:         rgba(19, 31, 134, 0.13);
+
+  /* Navigation chrome */
+  --workspace-nav-bg-strong:      var(--blue-900);
+  --workspace-header-height:      4rem;
+  --workspace-grid-gap:           1rem;
+  --workspace-sidebar-width:      14rem;
+  --workspace-sidebar-bg:         var(--blue-900);
+  --workspace-sidebar-foreground: var(--cream-50);
+  --workspace-sidebar-muted:      rgba(250, 243, 232, 0.5);
+
+  /* Semantic: info */
+  --workspace-info:      var(--blue-700);
+  --workspace-info-bg:   var(--blue-100);
+  --workspace-info-edge: var(--blue-200);
+
+  /* Semantic: success */
+  --workspace-success:      var(--green-600);
+  --workspace-success-bg:   var(--green-100);
+  --workspace-success-edge: var(--green-200);
+
+  /* Semantic: danger */
+  --workspace-danger:      var(--red-600);
+  --workspace-danger-bg:   var(--red-100);
+  --workspace-danger-edge: var(--red-400);
+
+  /* Semantic: warning */
+  --workspace-warning:      var(--gold-600);
+  --workspace-warning-bg:   var(--gold-100);
+  --workspace-warning-edge: var(--gold-200);
+
+  /* Accent + muted */
+  --accent:           var(--blue-700);
+  --accent-surface:   var(--blue-100);
+  --muted-foreground: var(--slate-400);
+
+  color-scheme: light;
+}

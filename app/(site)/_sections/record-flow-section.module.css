@@ -1,0 +1,27 @@
+/* Record-flow section heading. The scene itself is no longer built here: the
+   animation is public/how-diagram.html, embedded in an iframe by
+   record-flow-section.tsx and shared with /how. The ~1300 lines of scene CSS
+   that used to live below (rail, funnel, cabinet, drawers, clutter, keyframes)
+   were removed with that swap, along with components/motion/use-record-flow.ts.
+   Only the intro layout remains. */
+
+.intro {
+  display: grid;
+  gap: calc(var(--spacing) * 6);
+  margin-bottom: calc(var(--spacing) * 12);
+}
+
+@media (width >= 64rem) {
+  .intro {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: end;
+    gap: calc(var(--spacing) * 16);
+  }
+}
+
+.heading-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--spacing) * 4);
+}

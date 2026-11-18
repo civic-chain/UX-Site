@@ -1,0 +1,6 @@
+interface:
+  display_name: "Civicchain Audit"
+  short_description: "Read-only, findings-first repo review against strategy and guardrails"
+  default_prompt: "Use $civicchain-audit for review, audit, or verification work in this repo and return severity-graded findings before any summary."
+policy:
+  allow_implicit_invocation: true

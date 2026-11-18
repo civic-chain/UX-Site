@@ -1,0 +1,81 @@
+/* ─────────────────────────────────────────────────────────────
+   CivicChain — Global stylesheet entry
+   This file is intentionally short. It wires Tailwind v4 to the
+   token layer and composes the design system in layers:
+
+       tokens.css   →   primitives.css   →   patterns.css
+
+   Brand hexes, structural defaults, layout vars, and motion curves
+   live in tokens.css. Tailwind owns the spacing/radius/shadow utility
+   API; @theme below only exposes the few project additions. Semantic
+   type utilities live in primitives.css. Composites that carry meaning
+   live in patterns.css.
+
+   To add a runtime variable: tokens.css.
+   To add a new utility: primitives.css.
+   To add a composite layout: patterns.css.
+   ───────────────────────────────────────────────────────────── */
+
+@import "tailwindcss" source(none);
+@import "./styles/tokens.css";
+@import "./styles/primitives.css";
+@import "./styles/patterns.css";
+
+@source "./**/*.{ts,tsx}";
+@source "../components/**/*.{ts,tsx}";
+@source "../lib/**/*.{ts,tsx}";
+@source "../tests/visual/**/*.{ts,tsx}";
+
+/* ── Tailwind v4 theme — the flat palette ───────────────────
+   Six color ramps are the gallery you pick from; you apply a step
+   to a component directly (bg-blue-900, text-slate-500), no
+   card/primary/muted indirection. Only four semantic colors
+   survive as structural defaults the reset in primitives.css
+   needs: background/foreground (the page), border (the * default),
+   ring (focus). Plus type families. `@theme inline` passes color/font var()
+   through so token files stay separate. */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+
+  /* ── Color ramps — the whole palette, "just colors" ──
+     bg-blue-500, text-gold-800, border-blue-900/30. Hexes live in
+     tokens.css; six hue families, 50 (lightest) → 900 (darkest).
+     A border or divider tint is a step at an opacity, not a token. */
+  --color-blue-100: var(--blue-100);
+  --color-blue-200: var(--blue-200);
+  --color-blue-300: var(--blue-300);
+  --color-blue-500: var(--blue-500);
+  --color-blue-700: var(--blue-700);
+  --color-blue-900: var(--blue-900);
+  --color-gold-100: var(--gold-100);
+  --color-gold-200: var(--gold-200);
+  --color-gold-300: var(--gold-300);
+  --color-gold-500: var(--gold-500);
+  --color-gold-600: var(--gold-600);
+  --color-gold-800: var(--gold-800);
+  --color-green-100: var(--green-100);
+  --color-green-200: var(--green-200);
+  --color-green-300: var(--green-300);
+  --color-green-500: var(--green-500);
+  --color-green-600: var(--green-600);
+  --color-green-900: var(--green-900);
+  --color-cream-50: var(--cream-50);
+  --color-cream-100: var(--cream-100);
+  --color-cream-200: var(--cream-200);
+  --color-cream-300: var(--cream-300);
+  --color-slate-100: var(--slate-100);
+  --color-slate-200: var(--slate-200);
+  --color-slate-300: var(--slate-300);
+  --color-slate-400: var(--slate-400);
+  --color-slate-500: var(--slate-500);
+  --color-slate-700: var(--slate-700);
+  --color-red-100: var(--red-100);
+  --color-red-400: var(--red-400);
+  --color-red-600: var(--red-600);
+}

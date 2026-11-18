@@ -1,0 +1,151 @@
+export const liveRoutes = [
+  "/",
+  "/landing-v1",
+  "/about",
+  "/press",
+  "/how-it-works",
+  "/residents",
+  "/vendors",
+  "/trust",
+  "/resources",
+  "/resources/municipal-payment-delays",
+  "/brand",
+  "/brand/color",
+  "/brand/type",
+  "/brand/surface",
+  "/brand/components",
+  "/brand/examples",
+  "/brand/big-components",
+  "/brand/rules",
+] as const;
+
+export const marketingRoutes = [
+  {
+    key: "about",
+    path: "/about",
+    sectionIds: ["about-hero", "team"],
+  },
+  {
+    key: "how-it-works",
+    path: "/how-it-works",
+    sectionIds: [
+      "how-it-works-hero",
+      "how-it-works-cards",
+      "how-it-works-cta",
+    ],
+  },
+  {
+    key: "residents",
+    path: "/residents",
+    sectionIds: [
+      "residents-hero",
+      "residents-benefits",
+      "residents-steps",
+      "residents-coming-next",
+      "residents-faq",
+      "residents-cta",
+    ],
+  },
+  {
+    key: "vendors",
+    path: "/vendors",
+    sectionIds: [
+      "vendors-hero",
+      "vendors-benefits",
+      "vendors-steps",
+      "vendors-coming-next",
+      "vendors-faq",
+      "vendors-cta",
+    ],
+  },
+  {
+    key: "brand",
+    path: "/brand",
+    sectionIds: ["overview-hero", "overview-logos", "overview-index"],
+    brandNavLabel: "Overview",
+  },
+  {
+    key: "brand-color",
+    path: "/brand/color",
+    sectionIds: ["color-hero", "color-ramps"],
+    brandNavLabel: "Color",
+  },
+  {
+    key: "brand-type",
+    path: "/brand/type",
+    sectionIds: ["type-hero", "type-families", "type-scale"],
+    brandNavLabel: "Type",
+  },
+  {
+    key: "brand-surface",
+    path: "/brand/surface",
+    sectionIds: [
+      "surface-hero",
+      "surface-card",
+      "surface-image-compositions",
+      "surface-tones",
+      "surface-backgrounds",
+    ],
+    brandNavLabel: "Surface",
+  },
+  {
+    key: "brand-components",
+    path: "/brand/components",
+    sectionIds: ["components-hero", "components-actions", "components-tabs"],
+    brandNavLabel: "Components",
+  },
+  {
+    key: "brand-examples",
+    path: "/brand/examples",
+    sectionIds: ["examples-hero", "examples-cards", "examples-gaps"],
+    brandNavLabel: "Examples",
+  },
+  {
+    key: "brand-big-components",
+    path: "/brand/big-components",
+    sectionIds: ["big-hero", "big-shell"],
+    brandNavLabel: "Big components",
+  },
+  {
+    key: "brand-rules",
+    path: "/brand/rules",
+    sectionIds: [
+      "rules-hero",
+      "rules-layers",
+      "rules-palette",
+      "rules-surface-contract",
+      "rules-variant",
+      "rules-composition",
+      "rules-radius",
+      "rules-spacing",
+      "rules-padding",
+    ],
+    brandNavLabel: "Rules",
+  },
+  {
+    key: "trust",
+    path: "/trust",
+    sectionIds: [
+      "trust-hero",
+      "trust-rails",
+      "trust-ledger",
+      "trust-posture",
+      "trust-library",
+      "trust-request",
+    ],
+  },
+  {
+    key: "resources",
+    path: "/resources",
+    sectionIds: [],
+  },
+  {
+    key: "municipal-payment-delays",
+    path: "/resources/municipal-payment-delays",
+    sectionIds: [],
+  },
+] as const;
+
+export const standaloneDemoRoutes = [
+  "/civic-chain-demo",
+] as const;
