@@ -1,0 +1,105 @@
+# CivicChain TLaaS — Pricing Estimator
+
+A standalone web app that produces an **annual cost estimate for a municipality** to run
+**TLaaS (Trustless Ledger as a Service)** — CivicChain's blockchain-backed replacement for
+legacy BI / open-data incumbents, whose commercial weapon is **$0 per-user pricing**.
+
+Built to `TLaaS_Pricing_App_Build_Spec.md` (Draft v1.0). Styled to the
+[CivicChain brand system](https://civicchain-v2.vercel.app/brand) — DM Serif Text / DM Sans,
+OKLCH civic-ink + gold + sage palette.
+
+## Two modes
+
+| | **Municipality** (public) | **Sales rep** (passphrase-gated) |
+|---|---|---|
+| Inputs | Population, solicitations, departments, contact | + known volume, deployment, tier override, discount, add-ons, competitor benchmark |
+| Cost / margin | Hidden | Visible (COGS, gross margin, floor status) |
+| Discounting | No | Yes — guardrail-checked against the 60% margin floor |
+| Output | Value-framed estimate + PDF | Full quote + PDF proposal |
+
+Rep mode demo passphrase: **`civicchain`** (set `VITE_REP_PASSPHRASE` to change).
+
+## Run
+
+```bash
+npm install
+npm run dev        # http://localhost:5180
+npm test           # 16 tests — includes the spec's worked examples A & B
+npm run build      # static bundle in dist/  → deploy to Vercel/Netlify/S3
+```
+
+No backend is required for the calculator itself. Lead capture uses Firebase (below).
+
+## Lead capture (Firebase)
+
+Customer mode captures a **consented** lead (name, email, municipality, and a snapshot of the
+computed quote) to **Cloud Firestore**. The estimate is shown live regardless — the email is
+optional and only sent when the visitor ticks consent and clicks **Send me this estimate**.
+Until Firebase is configured the button is disabled with a note, so the app runs fine without it.
+
+**Firebase console setup:**
+
+1. **Firestore** → Build → Firestore Database → Create → *Production mode* → pick a region.
+2. **Web app** → Project settings → Your apps → Web (`</>`) → copy the `firebaseConfig` values
+   into `.env` (`VITE_FIREBASE_*`). These are **not secrets** — the apiKey is a public project
+   identifier; Firestore is secured by rules + App Check, not by hiding it.
+3. **Security rules** → paste [`firestore.rules`](firestore.rules) into Firestore → Rules
+   (or `firebase deploy --only firestore:rules`). They allow create-only, shape-validated writes
+   to `leads` and block all client reads/updates/deletes.
+4. **App Check (recommended)** → App Check → register the web app with **reCAPTCHA v3** → put the
+   site key in `VITE_RECAPTCHA_SITE_KEY`, then enable **Enforcement** for Firestore. Stops bots
+   spamming the collection. Optional — skipped cleanly if the key is blank.
+
+**Where leads land:** the Firebase console (Firestore → `leads`). This stays on the free Spark
+plan — no Cloud Functions. Email/CRM notifications would need a Cloud Function or the "Trigger
+Email" extension (Blaze plan) and can be added later.
+
+See [`.env.example`](.env.example) for the full variable list.
+
+## The one rule: pricing is DATA, not code
+
+**Every tunable number lives in [`src/pricing.config.ts`](src/pricing.config.ts).** Tiers, overage
+rates, estimation coefficients, implementation fees, COGS, the margin floor, and competitor
+defaults can all be changed there with **no code change**. The engine
+([`src/lib/pricing.ts`](src/lib/pricing.ts)) is a set of pure functions and never hard-codes a price.
+
+### Modeling principle (do not break)
+Population is a **sizing heuristic** and a **value-framing** metric only — it **never directly
+multiplies the price**. The directly-billed drivers are **on-chain anchors** (primary) and
+**ingestion transactions** (secondary). Charging per citizen would recreate the per-seat model
+we're attacking.
+
+## ⚑ Calibrate before launch (spec §12)
+
+The following in `pricing.config.ts` are seed/placeholder values — replace with real data:
+
+- **Estimation coefficients** (`estimation.*`) — calibrate against real pilot ingestion/anchoring volume.
+- **Implementation fees & COGS** (`implementation.*`, `cogs.*`) — plug in real onboarding hours + loaded rate.
+  COGS is **multi-tenant**: per-tenant infra = shared environment ÷ tenants-per-environment + marginal
+  per-tenant cost (dedicated/GovCloud bears the full unamortized environment). Calibrate the tenant counts.
+- **Competitor defaults** (`competitor.*`) — populate from the incumbent vendor's public procurement records.
+- **Margin floor** (`guardrail.MIN_GROSS_MARGIN`, default 60%) — confirm the target.
+- **Tier population floors** (`tiers[].minPopulation`, `tierSelection.usePopulationFloor`).
+
+## Structure
+
+```
+src/
+  pricing.config.ts     ← single source of truth (all $ and coefficients)
+  lib/
+    pricing.ts          ← pure estimation + tiering + quote engine
+    pricing.test.ts     ← worked examples A & B + overage/margin/competitor tests
+    pdf.ts              ← branded PDF quote/proposal export (jsPDF)
+    format.ts           ← currency / number helpers
+  components/
+    QuoteForm.tsx        ← customer + rep inputs
+    QuoteResults.tsx     ← headline metrics, breakdown, TCO, savings, margin
+    ui.tsx               ← brand-styled form primitives
+  App.tsx                ← mode toggle + rep auth gate + layout
+```
+
+## Roadmap (v1 out-of-scope, architected for)
+
+The config + UI are module-shaped so a second product (payment rails, card issuing, full
+CivicChain bundle) can be added later without reworking the engine. Live billing/metering and
+CRM lead-capture integration are Phase 2.

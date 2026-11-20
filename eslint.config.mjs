@@ -129,6 +129,7 @@ const eslintConfig = [
       ".ignore/**",
       ".obsidian/**",
       "_workspace/**",
+      "tlaas-pricing/**",
       ".claude/**",
       ".codex/**",
     ],

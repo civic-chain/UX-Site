@@ -37,6 +37,7 @@
   ],
   "exclude": [
     "node_modules",
-    "_workspace"
+    "_workspace",
+    "tlaas-pricing"
   ]
 }
